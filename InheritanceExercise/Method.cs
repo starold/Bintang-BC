@@ -1,0 +1,1 @@
+// Method helper sudah dipindahkan ke dalam class Program di MainProgram.cs

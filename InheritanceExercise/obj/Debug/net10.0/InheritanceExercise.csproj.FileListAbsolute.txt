@@ -1,0 +1,15 @@
+C:\Users\Bintang-BC\Documents\Bintang-BC\InheritanceExercise\obj\Debug\net10.0\InheritanceExercise.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Bintang-BC\Documents\Bintang-BC\InheritanceExercise\obj\Debug\net10.0\InheritanceExercise.AssemblyInfoInputs.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\InheritanceExercise\obj\Debug\net10.0\InheritanceExercise.AssemblyInfo.cs
+C:\Users\Bintang-BC\Documents\Bintang-BC\InheritanceExercise\obj\Debug\net10.0\InheritanceExercise.csproj.CoreCompileInputs.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\InheritanceExercise\obj\Debug\net10.0\InheritanceExercise.sourcelink.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\InheritanceExercise\bin\Debug\net10.0\InheritanceExercise.exe
+C:\Users\Bintang-BC\Documents\Bintang-BC\InheritanceExercise\bin\Debug\net10.0\InheritanceExercise.deps.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\InheritanceExercise\bin\Debug\net10.0\InheritanceExercise.runtimeconfig.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\InheritanceExercise\bin\Debug\net10.0\InheritanceExercise.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\InheritanceExercise\bin\Debug\net10.0\InheritanceExercise.pdb
+C:\Users\Bintang-BC\Documents\Bintang-BC\InheritanceExercise\obj\Debug\net10.0\InheritanceExercise.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\InheritanceExercise\obj\Debug\net10.0\refint\InheritanceExercise.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\InheritanceExercise\obj\Debug\net10.0\InheritanceExercise.pdb
+C:\Users\Bintang-BC\Documents\Bintang-BC\InheritanceExercise\obj\Debug\net10.0\InheritanceExercise.genruntimeconfig.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\InheritanceExercise\obj\Debug\net10.0\ref\InheritanceExercise.dll

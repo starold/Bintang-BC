@@ -1,0 +1,15 @@
+C:\Users\Bintang-BC\Documents\Bintang-BC\ObjectTypeExercise\bin\Debug\net10.0\ObjectTypeExercise.exe
+C:\Users\Bintang-BC\Documents\Bintang-BC\ObjectTypeExercise\bin\Debug\net10.0\ObjectTypeExercise.deps.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\ObjectTypeExercise\bin\Debug\net10.0\ObjectTypeExercise.runtimeconfig.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\ObjectTypeExercise\bin\Debug\net10.0\ObjectTypeExercise.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\ObjectTypeExercise\bin\Debug\net10.0\ObjectTypeExercise.pdb
+C:\Users\Bintang-BC\Documents\Bintang-BC\ObjectTypeExercise\obj\Debug\net10.0\ObjectTypeExercise.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Bintang-BC\Documents\Bintang-BC\ObjectTypeExercise\obj\Debug\net10.0\ObjectTypeExercise.AssemblyInfoInputs.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\ObjectTypeExercise\obj\Debug\net10.0\ObjectTypeExercise.AssemblyInfo.cs
+C:\Users\Bintang-BC\Documents\Bintang-BC\ObjectTypeExercise\obj\Debug\net10.0\ObjectTypeExercise.csproj.CoreCompileInputs.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\ObjectTypeExercise\obj\Debug\net10.0\ObjectTypeExercise.sourcelink.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\ObjectTypeExercise\obj\Debug\net10.0\ObjectTypeExercise.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\ObjectTypeExercise\obj\Debug\net10.0\refint\ObjectTypeExercise.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\ObjectTypeExercise\obj\Debug\net10.0\ObjectTypeExercise.pdb
+C:\Users\Bintang-BC\Documents\Bintang-BC\ObjectTypeExercise\obj\Debug\net10.0\ObjectTypeExercise.genruntimeconfig.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\ObjectTypeExercise\obj\Debug\net10.0\ref\ObjectTypeExercise.dll

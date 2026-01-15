@@ -1,0 +1,15 @@
+C:\Users\Bintang-BC\Documents\Bintang-BC\StructExercise\obj\Debug\net10.0\StructExercise.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Bintang-BC\Documents\Bintang-BC\StructExercise\obj\Debug\net10.0\StructExercise.AssemblyInfoInputs.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\StructExercise\obj\Debug\net10.0\StructExercise.AssemblyInfo.cs
+C:\Users\Bintang-BC\Documents\Bintang-BC\StructExercise\obj\Debug\net10.0\StructExercise.csproj.CoreCompileInputs.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\StructExercise\obj\Debug\net10.0\StructExercise.sourcelink.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\StructExercise\bin\Debug\net10.0\StructExercise.exe
+C:\Users\Bintang-BC\Documents\Bintang-BC\StructExercise\bin\Debug\net10.0\StructExercise.deps.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\StructExercise\bin\Debug\net10.0\StructExercise.runtimeconfig.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\StructExercise\bin\Debug\net10.0\StructExercise.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\StructExercise\bin\Debug\net10.0\StructExercise.pdb
+C:\Users\Bintang-BC\Documents\Bintang-BC\StructExercise\obj\Debug\net10.0\StructExercise.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\StructExercise\obj\Debug\net10.0\refint\StructExercise.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\StructExercise\obj\Debug\net10.0\StructExercise.pdb
+C:\Users\Bintang-BC\Documents\Bintang-BC\StructExercise\obj\Debug\net10.0\StructExercise.genruntimeconfig.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\StructExercise\obj\Debug\net10.0\ref\StructExercise.dll
