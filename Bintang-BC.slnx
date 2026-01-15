@@ -1,2 +1,10 @@
 <Solution>
+  <Folder Name="/Foo Bar/">
+    <Project Path="Foo Bar/FooBar1.csproj" />
+  </Folder>
+  <Project Path="Bintang-BC/Bintang-BC.csproj" />
+  <Project Path="ExampleArray/ExampleArray.csproj" />
+  <Project Path="Exercise1/Exercise1.csproj" />
+  <Project Path="Exercise2/Exercise2.csproj" />
+  <Project Path="TesFoobarLagi/TesFoobarLagi.csproj" />
 </Solution>

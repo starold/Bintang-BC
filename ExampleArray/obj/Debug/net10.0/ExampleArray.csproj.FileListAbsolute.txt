@@ -1,0 +1,15 @@
+C:\Users\Bintang-BC\Documents\Bintang-BC\ExampleArray\bin\Debug\net10.0\ExampleArray.exe
+C:\Users\Bintang-BC\Documents\Bintang-BC\ExampleArray\bin\Debug\net10.0\ExampleArray.deps.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\ExampleArray\bin\Debug\net10.0\ExampleArray.runtimeconfig.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\ExampleArray\bin\Debug\net10.0\ExampleArray.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\ExampleArray\bin\Debug\net10.0\ExampleArray.pdb
+C:\Users\Bintang-BC\Documents\Bintang-BC\ExampleArray\obj\Debug\net10.0\ExampleArray.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Bintang-BC\Documents\Bintang-BC\ExampleArray\obj\Debug\net10.0\ExampleArray.AssemblyInfoInputs.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\ExampleArray\obj\Debug\net10.0\ExampleArray.AssemblyInfo.cs
+C:\Users\Bintang-BC\Documents\Bintang-BC\ExampleArray\obj\Debug\net10.0\ExampleArray.csproj.CoreCompileInputs.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\ExampleArray\obj\Debug\net10.0\ExampleArray.sourcelink.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\ExampleArray\obj\Debug\net10.0\ExampleArray.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\ExampleArray\obj\Debug\net10.0\refint\ExampleArray.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\ExampleArray\obj\Debug\net10.0\ExampleArray.pdb
+C:\Users\Bintang-BC\Documents\Bintang-BC\ExampleArray\obj\Debug\net10.0\ExampleArray.genruntimeconfig.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\ExampleArray\obj\Debug\net10.0\ref\ExampleArray.dll
