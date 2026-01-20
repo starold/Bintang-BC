@@ -1,0 +1,15 @@
+C:\Users\Bintang-BC\Documents\Bintang-BC\FooBarExercise\bin\Debug\net10.0\FooBarExercise.exe
+C:\Users\Bintang-BC\Documents\Bintang-BC\FooBarExercise\bin\Debug\net10.0\FooBarExercise.deps.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\FooBarExercise\bin\Debug\net10.0\FooBarExercise.runtimeconfig.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\FooBarExercise\bin\Debug\net10.0\FooBarExercise.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\FooBarExercise\bin\Debug\net10.0\FooBarExercise.pdb
+C:\Users\Bintang-BC\Documents\Bintang-BC\FooBarExercise\obj\Debug\net10.0\FooBarExercise.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Bintang-BC\Documents\Bintang-BC\FooBarExercise\obj\Debug\net10.0\FooBarExercise.AssemblyInfoInputs.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\FooBarExercise\obj\Debug\net10.0\FooBarExercise.AssemblyInfo.cs
+C:\Users\Bintang-BC\Documents\Bintang-BC\FooBarExercise\obj\Debug\net10.0\FooBarExercise.csproj.CoreCompileInputs.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\FooBarExercise\obj\Debug\net10.0\FooBarExercise.sourcelink.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\FooBarExercise\obj\Debug\net10.0\FooBarExercise.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\FooBarExercise\obj\Debug\net10.0\refint\FooBarExercise.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\FooBarExercise\obj\Debug\net10.0\FooBarExercise.pdb
+C:\Users\Bintang-BC\Documents\Bintang-BC\FooBarExercise\obj\Debug\net10.0\FooBarExercise.genruntimeconfig.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\FooBarExercise\obj\Debug\net10.0\ref\FooBarExercise.dll

@@ -1,0 +1,15 @@
+C:\Users\Bintang-BC\Documents\Bintang-BC\CombineExercise\obj\Debug\net10.0\CombineExercise.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Bintang-BC\Documents\Bintang-BC\CombineExercise\obj\Debug\net10.0\CombineExercise.AssemblyInfoInputs.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\CombineExercise\obj\Debug\net10.0\CombineExercise.AssemblyInfo.cs
+C:\Users\Bintang-BC\Documents\Bintang-BC\CombineExercise\obj\Debug\net10.0\CombineExercise.csproj.CoreCompileInputs.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\CombineExercise\obj\Debug\net10.0\CombineExercise.sourcelink.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\CombineExercise\bin\Debug\net10.0\CombineExercise.exe
+C:\Users\Bintang-BC\Documents\Bintang-BC\CombineExercise\bin\Debug\net10.0\CombineExercise.deps.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\CombineExercise\bin\Debug\net10.0\CombineExercise.runtimeconfig.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\CombineExercise\bin\Debug\net10.0\CombineExercise.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\CombineExercise\bin\Debug\net10.0\CombineExercise.pdb
+C:\Users\Bintang-BC\Documents\Bintang-BC\CombineExercise\obj\Debug\net10.0\CombineExercise.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\CombineExercise\obj\Debug\net10.0\refint\CombineExercise.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\CombineExercise\obj\Debug\net10.0\CombineExercise.pdb
+C:\Users\Bintang-BC\Documents\Bintang-BC\CombineExercise\obj\Debug\net10.0\CombineExercise.genruntimeconfig.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\CombineExercise\obj\Debug\net10.0\ref\CombineExercise.dll

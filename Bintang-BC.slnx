@@ -5,9 +5,12 @@
   <Project Path="AccessModifiers/AccessModifiers.csproj" />
   <Project Path="Bintang-BC/Bintang-BC.csproj" />
   <Project Path="ClassExercise/ClassExercise.csproj" />
+  <Project Path="CombineExercise/CombineExercise.csproj" />
   <Project Path="ExampleArray/ExampleArray.csproj" />
   <Project Path="Exercise1/Exercise1.csproj" />
   <Project Path="Exercise2/Exercise2.csproj" />
+  <Project Path="Exercise3/Exercise3.csproj" />
+  <Project Path="FooBarExercise/FooBarExercise.csproj" />
   <Project Path="InheritanceExercise/InheritanceExercise.csproj" />
   <Project Path="ObjectTypeExercise/ObjectTypeExercise.csproj" />
   <Project Path="StructExercise/StructExercise.csproj" />
