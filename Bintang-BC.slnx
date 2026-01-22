@@ -4,6 +4,7 @@
   </Folder>
   <Project Path="AccessModifiers/AccessModifiers.csproj" />
   <Project Path="Bintang-BC/Bintang-BC.csproj" />
+  <Project Path="C#Basic/C#Basic.csproj" />
   <Project Path="ClassExercise/ClassExercise.csproj" />
   <Project Path="CombineExercise/CombineExercise.csproj" />
   <Project Path="ExampleArray/ExampleArray.csproj" />

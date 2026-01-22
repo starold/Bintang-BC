@@ -1,0 +1,15 @@
+C:\Users\Bintang-BC\Documents\Bintang-BC\C#Basic\obj\Debug\net10.0\C#Basic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Bintang-BC\Documents\Bintang-BC\C#Basic\obj\Debug\net10.0\C#Basic.AssemblyInfoInputs.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\C#Basic\obj\Debug\net10.0\C#Basic.AssemblyInfo.cs
+C:\Users\Bintang-BC\Documents\Bintang-BC\C#Basic\obj\Debug\net10.0\C#Basic.csproj.CoreCompileInputs.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\C#Basic\obj\Debug\net10.0\C#Basic.sourcelink.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\C#Basic\bin\Debug\net10.0\C#Basic.exe
+C:\Users\Bintang-BC\Documents\Bintang-BC\C#Basic\bin\Debug\net10.0\C#Basic.deps.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\C#Basic\bin\Debug\net10.0\C#Basic.runtimeconfig.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\C#Basic\bin\Debug\net10.0\C#Basic.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\C#Basic\bin\Debug\net10.0\C#Basic.pdb
+C:\Users\Bintang-BC\Documents\Bintang-BC\C#Basic\obj\Debug\net10.0\C#Basic.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\C#Basic\obj\Debug\net10.0\refint\C#Basic.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\C#Basic\obj\Debug\net10.0\C#Basic.pdb
+C:\Users\Bintang-BC\Documents\Bintang-BC\C#Basic\obj\Debug\net10.0\C#Basic.genruntimeconfig.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\C#Basic\obj\Debug\net10.0\ref\C#Basic.dll
