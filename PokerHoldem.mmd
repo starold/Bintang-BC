@@ -1,0 +1,176 @@
+classDiagram
+
+class Table {
+  -List~Player~ _players
+  -Dealer _dealer
+  -Deck _deck
+  -List~Deck~ _communityCards
+
+  +int MinSeat$
+  +int MaxSeat$
+
+  +Table()
+
+  +AddPlayer(Player player) : bool
+  +RemovePlayer(Player player) : bool
+
+  +DealPreFlop() : void
+  +DealFlop() : void
+  +DealTurn() : void
+  +DealRiver() : void
+
+  +ClearTable() : void
+}
+
+class Player {
+  +int Id : readonly
+  +string Name
+  +int Chips
+
+  -List~Deck~ _hand
+  -PlayerState _state
+
+  +Player(int id, string name, int chips)
+
+  +Bet(int amount) : void
+  +Call() : void
+  +Raise(int amount) : void
+  +Check() : void
+  +Fold() : void
+
+  +ReceiveCard(Deck card) : void
+  +ClearHand() : void
+
+  +Action~int~ OnChipsChanged <<event>>
+  +Action~Deck~ OnCardReceived <<event>>
+}
+
+class Deck {
+  -List~Deck~ _cards
+
+  +Suit Suit
+  +Rank Rank
+
+  +Deck()
+  +Deck(Suit suit, Rank rank)
+
+  +Initialize() : void
+  +Shuffle() : void
+  +Draw() : Deck
+  +RemainingCards() : int
+}
+
+class Dealer {
+  +Dealer()
+
+  +Shuffle(Deck deck) : void
+  +DealCard(Deck deck) : Deck
+}
+
+
+
+class HandEvaluator {
+  +Evaluate(
+    List~Deck~ hand,
+    List~Deck~ communityCards
+  ) : HandRank
+}
+
+class GamePhase {
+  <<Enumeration>>
+  PreFlop
+  Flop
+  Turn
+  River
+  Showdown
+}
+
+class PlayerState {
+  <<Enumeration>>
+  Active
+  Folded
+  AllIn
+}
+
+class Suit {
+  <<Enumeration>>
+  Hearts
+  Diamonds
+  Clubs
+  Spades
+}
+
+class Rank {
+  <<Enumeration>>
+  Two
+  Three
+  Four
+  Five
+  Six
+  Seven
+  Eight
+  Nine
+  Ten
+  Jack
+  Queen
+  King
+  Ace
+}
+
+class HandRank {
+  <<Enumeration>>
+  HighCard
+  OnePair
+  TwoPair
+  ThreeOfAKind
+  Straight
+  Flush
+  FullHouse
+  FourOfAKind
+  StraightFlush
+  RoyalFlush
+}
+
+class GameController {
+  +int MinPlayers$
+  +int MaxPlayers$
+
+  -GamePhase _phase
+  -int _pot
+  -int _currentBet
+  -Table _table
+
+  +GameController()
+
+  +StartGame() : void
+  +NextPhase() : void
+  +HandleBet(Player player, int amount) : bool
+  +HandleCall(Player player) : bool
+  +HandleRaise(Player player, int amount) : bool
+  +HandleFold(Player player) : void
+  +EndRound() : void
+  +ResetGame() : void
+
+  +Action~GamePhase~ OnPhaseChanged <<event>>
+  +Action~Player, string~ OnPlayerAction <<event>>
+  +Action~Player, HandRank~ OnHandEvaluated <<event>>
+}
+
+GameController --> Table
+GameController --> HandEvaluator
+GameController --> GamePhase
+
+Table o-- Player
+Table --> Dealer
+Table *-- Deck
+Table o-- Deck : communityCards
+
+Player o-- Deck : hand
+Player *-- PlayerState
+
+Dealer ..> Deck
+
+Deck ..> Suit
+Deck ..> Rank
+
+HandEvaluator ..> HandRank
