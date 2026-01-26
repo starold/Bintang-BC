@@ -1,9 +1,10 @@
-﻿// Define rules: divisor dan output text
+﻿
 var rules = new List<(int divisor, string text)>
 {
-    (5, "Foo"),
-    (3, "Bar"),
-    (11, "Jazz"),
+    (5, "Bar"),
+    (3, "Foo"),
+    (4, "Baz"),
+    (9, "Huzz"),
     (7, "Buzz")
 };
 
@@ -23,7 +24,6 @@ for (int i = 1; i <= n; i++)
         }
     }
     
-    // Jika tidak ada rule yang cocok, tampilkan angkanya
     Console.WriteLine(string.IsNullOrEmpty(result) ? i.ToString() : result);
 }
 
