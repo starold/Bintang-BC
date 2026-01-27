@@ -1,176 +1,241 @@
 classDiagram
+direction TB
+
+%% =========================
+%% GAME CONTROLLER
+%% =========================
+
+class GameController {
+    +int MinPlayers$
+    +int MaxPlayers$
+
+    -GamePhase _phase
+    -ChipStack _pot
+    -int _currentBet
+    -Table _table
+    -int _dealerIndex
+    -int _currentTurnIndex
+
+    +Action~GamePhase~ OnPhaseChanged ~~
+    +Action~Player,string~ OnPlayerAction ~~
+    +Action~Player,HandRank~ OnHandEvaluated ~~
+
+    +GameController()
+
+    %% ===== GAME LIFECYCLE =====
+    +InitializeGame() : void
+    +StartGame() : void
+    +StartRound() : void
+    +EndRound() : void
+    +ResetGame() : void
+    +DetermineWinners() : List~Player~
+    +DistributePot(List~Player~) : void
+
+    %% ===== PHASE CONTROL =====
+    +NextPhase() : void
+    +SetPhase(GamePhase) : void
+    +IsFinalPhase() : bool
+
+    %% ===== TURN CONTROL =====
+    +StartTurn() : void
+    +EndTurn() : void
+    +GetCurrentPlayer() : Player
+    +MoveToNextPlayer() : void
+    +IsBettingRoundComplete() : bool
+
+    %% ===== BETTING =====
+    +HandleBet(Player, ChipStack) : bool
+    +HandleCall(Player) : bool
+    +HandleRaise(Player, ChipStack) : bool
+    +HandleCheck(Player) : bool
+    +HandleFold(Player) : void
+    +HandleAllIn(Player) : void
+
+    %% ===== BET VALIDATION =====
+    -ValidatePlayerTurn(Player) : bool
+    -ValidateBetAmount(Player, ChipStack) : bool
+    -UpdateCurrentBet(int) : void
+    -CollectBet(Player, ChipStack) : void
+
+    %% ===== DEALER RESPONSIBILITY (MERGED) =====
+    -ShuffleDeck() : void
+    -BurnCard() : void
+    -DealHoleCards() : void
+    -DealFlop() : void
+    -DealTurn() : void
+    -DealRiver() : void
+}
+
+%% =========================
+%% TABLE
+%% =========================
 
 class Table {
-  -List~Player~ _players
-  -Dealer _dealer
-  -Deck _deck
-  -List~Deck~ _communityCards
+    -List~Player~ _players
+    -Deck _deck
+    -List~Card~ _communityCards
 
-  +int MinSeat$
-  +int MaxSeat$
+    +int MinSeat$
+    +int MaxSeat$
 
-  +Table()
-
-  +AddPlayer(Player player) : bool
-  +RemovePlayer(Player player) : bool
-
-  +DealPreFlop() : void
-  +DealFlop() : void
-  +DealTurn() : void
-  +DealRiver() : void
-
-  +ClearTable() : void
+    +Table()
+    +AddPlayer(Player) : bool
+    +RemovePlayer(Player) : bool
+    +GetActivePlayers() : List~Player~
+    +ResetTable() : void
+    +AddCommunityCard(Card) : void
+    +ClearCommunityCards() : void
 }
+
+%% =========================
+%% PLAYER
+%% =========================
 
 class Player {
-  +int Id : readonly
-  +string Name
-  +int Chips
+    +int Id : readonly
+    +string Name
 
-  -List~Deck~ _hand
-  -PlayerState _state
+    -ChipStack _chips
+    -List~Card~ _hand
+    -PlayerState _state
 
-  +Player(int id, string name, int chips)
+    +Action~ChipStack~ OnChipsChanged ~~
+    +Action~Card~ OnCardReceived ~~
 
-  +Bet(int amount) : void
-  +Call() : void
-  +Raise(int amount) : void
-  +Check() : void
-  +Fold() : void
+    +Player(int, string, ChipStack)
 
-  +ReceiveCard(Deck card) : void
-  +ClearHand() : void
+    %% ===== PLAYER ACTION =====
+    +Bet(ChipStack) : void
+    +Call() : void
+    +Raise(ChipStack) : void
+    +Check() : void
+    +Fold() : void
+    +AllIn() : void
 
-  +Action~int~ OnChipsChanged <<event>>
-  +Action~Deck~ OnCardReceived <<event>>
+    %% ===== CARD HANDLING =====
+    +ReceiveCard(Card) : void
+    +ClearHand() : void
+
+    %% ===== STATE =====
+    +SetState(PlayerState) : void
+    +IsActive() : bool
+    +HasChips() : bool
 }
+
+%% =========================
+%% CHIP SYSTEM
+%% =========================
+
+class Chip {
+    +int Value
+}
+
+class ChipStack {
+    -List~Chip~ _chips
+
+    +TotalValue() : int
+    +AddChip(Chip) : void
+    +AddStack(ChipStack) : void
+    +RemoveValue(int) : ChipStack
+    +IsEmpty() : bool
+}
+
+%% =========================
+%% CARD SYSTEM
+%% =========================
 
 class Deck {
-  -List~Deck~ _cards
+    -Stack~Card~ _cards
 
-  +Suit Suit
-  +Rank Rank
-
-  +Deck()
-  +Deck(Suit suit, Rank rank)
-
-  +Initialize() : void
-  +Shuffle() : void
-  +Draw() : Deck
-  +RemainingCards() : int
+    +Initialize() : void
+    +Shuffle() : void
+    +Draw() : Card
+    +RemainingCards() : int
 }
 
-class Dealer {
-  +Dealer()
-
-  +Shuffle(Deck deck) : void
-  +DealCard(Deck deck) : Deck
+class Card {
+    +Suit Suit
+    +Rank Rank
 }
 
-
-
-class HandEvaluator {
-  +Evaluate(
-    List~Deck~ hand,
-    List~Deck~ communityCards
-  ) : HandRank
-}
+%% =========================
+%% ENUMS
+%% =========================
 
 class GamePhase {
-  <<Enumeration>>
-  PreFlop
-  Flop
-  Turn
-  River
-  Showdown
+    <<enumeration>>
+    PreFlop
+    Flop
+    Turn
+    River
+    Showdown
 }
 
 class PlayerState {
-  <<Enumeration>>
-  Active
-  Folded
-  AllIn
+    <<enumeration>>
+    Active
+    Folded
+    AllIn
+    Eliminated
 }
 
 class Suit {
-  <<Enumeration>>
-  Hearts
-  Diamonds
-  Clubs
-  Spades
+    <<enumeration>>
+    Hearts
+    Diamonds
+    Clubs
+    Spades
 }
 
 class Rank {
-  <<Enumeration>>
-  Two
-  Three
-  Four
-  Five
-  Six
-  Seven
-  Eight
-  Nine
-  Ten
-  Jack
-  Queen
-  King
-  Ace
+    <<enumeration>>
+    Two
+    Three
+    Four
+    Five
+    Six
+    Seven
+    Eight
+    Nine
+    Ten
+    Jack
+    Queen
+    King
+    Ace
 }
 
 class HandRank {
-  <<Enumeration>>
-  HighCard
-  OnePair
-  TwoPair
-  ThreeOfAKind
-  Straight
-  Flush
-  FullHouse
-  FourOfAKind
-  StraightFlush
-  RoyalFlush
+    <<enumeration>>
+    HighCard
+    OnePair
+    TwoPair
+    ThreeOfAKind
+    Straight
+    Flush
+    FullHouse
+    FourOfAKind
+    StraightFlush
+    RoyalFlush
 }
 
-class GameController {
-  +int MinPlayers$
-  +int MaxPlayers$
+%% =========================
+%% RELATIONSHIPS
+%% =========================
 
-  -GamePhase _phase
-  -int _pot
-  -int _currentBet
-  -Table _table
-
-  +GameController()
-
-  +StartGame() : void
-  +NextPhase() : void
-  +HandleBet(Player player, int amount) : bool
-  +HandleCall(Player player) : bool
-  +HandleRaise(Player player, int amount) : bool
-  +HandleFold(Player player) : void
-  +EndRound() : void
-  +ResetGame() : void
-
-  +Action~GamePhase~ OnPhaseChanged <<event>>
-  +Action~Player, string~ OnPlayerAction <<event>>
-  +Action~Player, HandRank~ OnHandEvaluated <<event>>
-}
-
-GameController --> Table
-GameController --> HandEvaluator
+GameController *-- Table
+GameController *-- ChipStack : pot
 GameController --> GamePhase
+GameController --> HandRank
 
 Table o-- Player
-Table --> Dealer
 Table *-- Deck
-Table o-- Deck : communityCards
+Table o-- Card : communityCards
 
-Player o-- Deck : hand
-Player *-- PlayerState
+Player *-- ChipStack
+Player o-- Card : hand
+Player --> PlayerState
 
-Dealer ..> Deck
-
-Deck ..> Suit
-Deck ..> Rank
-
-HandEvaluator ..> HandRank
+ChipStack *-- Chip
+Deck *-- Card
+Card --> Suit
+Card --> Rank
