@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Bintang-BC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+404e24674a670575855d0f1af43b436c27abf448")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+030a6312a52263ea341fb6d18bee9956f8caf149")]
 [assembly: System.Reflection.AssemblyProductAttribute("Bintang-BC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Bintang-BC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

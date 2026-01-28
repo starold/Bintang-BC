@@ -7,6 +7,7 @@
   <Project Path="C#Basic/C#Basic.csproj" />
   <Project Path="ClassExercise/ClassExercise.csproj" />
   <Project Path="CombineExercise/CombineExercise.csproj" />
+  <Project Path="DisposalAndGC/DisposalAndGC.csproj" />
   <Project Path="ExampleArray/ExampleArray.csproj" />
   <Project Path="Exercise1/Exercise1.csproj" />
   <Project Path="Exercise2/Exercise2.csproj" />
