@@ -1,0 +1,15 @@
+C:\Users\Bintang-BC\Documents\Bintang-BC\Logic Exercise\bin\Debug\net10.0\Logic Exercise.exe
+C:\Users\Bintang-BC\Documents\Bintang-BC\Logic Exercise\bin\Debug\net10.0\Logic Exercise.deps.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\Logic Exercise\bin\Debug\net10.0\Logic Exercise.runtimeconfig.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\Logic Exercise\bin\Debug\net10.0\Logic Exercise.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\Logic Exercise\bin\Debug\net10.0\Logic Exercise.pdb
+C:\Users\Bintang-BC\Documents\Bintang-BC\Logic Exercise\obj\Debug\net10.0\Logic Exercise.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Bintang-BC\Documents\Bintang-BC\Logic Exercise\obj\Debug\net10.0\Logic Exercise.AssemblyInfoInputs.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\Logic Exercise\obj\Debug\net10.0\Logic Exercise.AssemblyInfo.cs
+C:\Users\Bintang-BC\Documents\Bintang-BC\Logic Exercise\obj\Debug\net10.0\Logic Exercise.csproj.CoreCompileInputs.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\Logic Exercise\obj\Debug\net10.0\Logic Exercise.sourcelink.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\Logic Exercise\obj\Debug\net10.0\Logic Exercise.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\Logic Exercise\obj\Debug\net10.0\refint\Logic Exercise.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\Logic Exercise\obj\Debug\net10.0\Logic Exercise.pdb
+C:\Users\Bintang-BC\Documents\Bintang-BC\Logic Exercise\obj\Debug\net10.0\Logic Exercise.genruntimeconfig.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\Logic Exercise\obj\Debug\net10.0\ref\Logic Exercise.dll

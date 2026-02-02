@@ -14,6 +14,7 @@
   <Project Path="Exercise3/Exercise3.csproj" />
   <Project Path="FooBarExercise/FooBarExercise.csproj" />
   <Project Path="InheritanceExercise/InheritanceExercise.csproj" />
+  <Project Path="Logic Exercise/Logic Exercise.csproj" />
   <Project Path="ObjectTypeExercise/ObjectTypeExercise.csproj" />
   <Project Path="StructExercise/StructExercise.csproj" />
   <Project Path="TesFoobarLagi/TesFoobarLagi.csproj" />
