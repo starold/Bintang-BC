@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CombineExercise")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+82fe31a18de9a84df76427e863d40c519632a86a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3142853d307bb6746aa93a26852fe4548bce9dcc")]
 [assembly: System.Reflection.AssemblyProductAttribute("CombineExercise")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CombineExercise")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

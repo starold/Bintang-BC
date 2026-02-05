@@ -1,0 +1,15 @@
+C:\Users\Bintang-BC\Documents\Bintang-BC\BattleshipWeb\obj\Debug\net10.0\BattleshipWeb.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Bintang-BC\Documents\Bintang-BC\BattleshipWeb\obj\Debug\net10.0\BattleshipWeb.AssemblyInfoInputs.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\BattleshipWeb\obj\Debug\net10.0\BattleshipWeb.AssemblyInfo.cs
+C:\Users\Bintang-BC\Documents\Bintang-BC\BattleshipWeb\obj\Debug\net10.0\BattleshipWeb.csproj.CoreCompileInputs.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\BattleshipWeb\obj\Debug\net10.0\BattleshipWeb.sourcelink.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\BattleshipWeb\bin\Debug\net10.0\BattleshipWeb.exe
+C:\Users\Bintang-BC\Documents\Bintang-BC\BattleshipWeb\bin\Debug\net10.0\BattleshipWeb.deps.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\BattleshipWeb\bin\Debug\net10.0\BattleshipWeb.runtimeconfig.json
+C:\Users\Bintang-BC\Documents\Bintang-BC\BattleshipWeb\bin\Debug\net10.0\BattleshipWeb.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\BattleshipWeb\bin\Debug\net10.0\BattleshipWeb.pdb
+C:\Users\Bintang-BC\Documents\Bintang-BC\BattleshipWeb\obj\Debug\net10.0\BattleshipWeb.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\BattleshipWeb\obj\Debug\net10.0\refint\BattleshipWeb.dll
+C:\Users\Bintang-BC\Documents\Bintang-BC\BattleshipWeb\obj\Debug\net10.0\BattleshipWeb.pdb
+C:\Users\Bintang-BC\Documents\Bintang-BC\BattleshipWeb\obj\Debug\net10.0\BattleshipWeb.genruntimeconfig.cache
+C:\Users\Bintang-BC\Documents\Bintang-BC\BattleshipWeb\obj\Debug\net10.0\ref\BattleshipWeb.dll
