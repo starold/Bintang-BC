@@ -233,5 +233,78 @@ namespace BattleshipWeb.Models
             
             return ships.Count(s => IsShipFullyHit(s));
         }
+
+        public void PlaceShips(IPlayer player)
+        {
+            // Placing one of each type for simplicity
+            var types = new[] { ShipType.Carrier, ShipType.Battleship, ShipType.Cruiser };
+
+            foreach (var type in types)
+            {
+                bool placed = false;
+                while (!placed)
+                {
+                    Console.Clear();
+                    Console.WriteLine($"{player.Name} Placing {type} (Size: {new Ship(type).Size})");
+                    RenderBoard(GetBoard(player), showShips: true);
+                    
+                    Console.WriteLine("Enter start coordinate (e.g. A0):");
+                    var input = Console.ReadLine();
+                    var pos = Position.Parse(input ?? "");
+                    if (pos == null) { Console.WriteLine("Invalid coord."); Console.ReadKey(); continue; }
+
+                    Console.WriteLine("Enter orientation (H for Horizontal, V for Vertical):");
+                    var orientInput = Console.ReadLine()?.ToUpper();
+                    Orientation orient = (orientInput == "V" || orientInput == "VERTICAL") ? Orientation.Vertical : Orientation.Horizontal;
+
+                    // Swap player if needed to ensure we place for the correct player
+                    // In the original Program.cs, game.CurrentPlayer was set before calling PlaceShips.
+                    // Here we ensure it matches the passed player.
+                    var previousPlayer = CurrentPlayer;
+                    CurrentPlayer = player;
+                    if (PlaceShip(type, pos, orient))
+                    {
+                        placed = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid placement (Out of bounds or overlap). Try again.");
+                        Console.ReadKey();
+                    }
+                    CurrentPlayer = previousPlayer;
+                }
+            }
+        }
+
+        public static void RenderBoard(IBoard board, bool showShips)
+        {
+            Console.Write("  ");
+            for (int c = 0; c < board.Col; c++) Console.Write(c + " ");
+            Console.WriteLine();
+
+            for (int r = 0; r < board.Row; r++)
+            {
+                Console.Write((char)('A' + r) + " ");
+                for (int c = 0; c < board.Col; c++)
+                {
+                    var cell = board.Cells[r, c];
+                    char symbol = '~'; // Water
+                    
+                    if (cell.IsShot)
+                    {
+                        symbol = (cell.Ship != null) ? 'X' : 'O';
+                    }
+                    else
+                    {
+                        if (showShips && cell.Ship != null)
+                        {
+                            symbol = 'S'; // Ship
+                        }
+                    }
+                    Console.Write(symbol + " ");
+                }
+                Console.WriteLine();
+            }
+        }
     }
 }

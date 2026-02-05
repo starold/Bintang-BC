@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Bintang-BC\\Documents\\Bintang-BC\\ExampleArray\\ExampleArray.csproj": {}
+    "C:\\Users\\Hp\\Documents\\Bintang-BC\\ExampleArray\\ExampleArray.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Bintang-BC\\Documents\\Bintang-BC\\ExampleArray\\ExampleArray.csproj": {
+    "C:\\Users\\Hp\\Documents\\Bintang-BC\\ExampleArray\\ExampleArray.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Bintang-BC\\Documents\\Bintang-BC\\ExampleArray\\ExampleArray.csproj",
+        "projectUniqueName": "C:\\Users\\Hp\\Documents\\Bintang-BC\\ExampleArray\\ExampleArray.csproj",
         "projectName": "ExampleArray",
-        "projectPath": "C:\\Users\\Bintang-BC\\Documents\\Bintang-BC\\ExampleArray\\ExampleArray.csproj",
-        "packagesPath": "C:\\Users\\Bintang-BC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Bintang-BC\\Documents\\Bintang-BC\\ExampleArray\\obj\\",
+        "projectPath": "C:\\Users\\Hp\\Documents\\Bintang-BC\\ExampleArray\\ExampleArray.csproj",
+        "packagesPath": "C:\\Users\\Hp\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Hp\\Documents\\Bintang-BC\\ExampleArray\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Bintang-BC\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
