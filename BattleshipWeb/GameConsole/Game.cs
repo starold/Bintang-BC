@@ -1,6 +1,7 @@
 using BattleshipWeb.Enums;
 using BattleshipWeb.Interface;
 using BattleshipWeb.Models;
+using BattleshipWeb.GameConsole;
 
 
 namespace BattleshipWeb.Models
@@ -222,7 +223,7 @@ namespace BattleshipWeb.Models
                 {
                     Console.Clear();
                     Console.WriteLine($"{player.Name} Placing {type} (Size: {new Ship(type).Size})");
-                    RenderBoard(GetBoard(player), showShips: true);
+                    RenderBoard.Render(GetBoard(player), showShips: true);
                     
                     Console.WriteLine("Enter start coordinate (e.g. A0):");
                     var input = Console.ReadLine();
@@ -252,35 +253,6 @@ namespace BattleshipWeb.Models
             }
         }
 
-        public static void RenderBoard(IBoard board, bool showShips)
-        {
-            Console.Write("  ");
-            for (int c = 0; c < board.Col; c++) Console.Write(c + " ");
-            Console.WriteLine();
 
-            for (int r = 0; r < board.Row; r++)
-            {
-                Console.Write((char)('A' + r) + " ");
-                for (int c = 0; c < board.Col; c++)
-                {
-                    var cell = board.Cells[r, c];
-                    char symbol = '~'; // Water
-                    
-                    if (cell.IsShot)
-                    {
-                        symbol = (cell.Ship != null) ? 'X' : 'O';
-                    }
-                    else
-                    {
-                        if (showShips && cell.Ship != null)
-                        {
-                            symbol = 'S'; // Ship
-                        }
-                    }
-                    Console.Write(symbol + " ");
-                }
-                Console.WriteLine();
-            }
-        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using BattleshipWeb.Enums;
 using BattleshipWeb.Interface;
 using BattleshipWeb.Models;
+using BattleshipWeb.GameConsole;
 
 
 namespace BattleshipWeb
@@ -82,17 +83,17 @@ namespace BattleshipWeb
                 // Show Boards
                 // We'll show them stacked for simplicity in console.
                 Console.WriteLine("--- OPPONENT BOARD (Target) ---");
-                Game.RenderBoard(game.GetBoard(opponent), showShips: false);
+                RenderBoard.Render(game.GetBoard(opponent), showShips: false);
                 
                 Console.WriteLine("\n--- YOUR BOARD ---");
-                Game.RenderBoard(game.GetBoard(currentPlayer), showShips: true);
+                RenderBoard.Render(game.GetBoard(currentPlayer), showShips: true);
 
                 Console.WriteLine("\nEnter coordinates to fire (e.g. A5), or 'exit' to quit:");
                 var input = Console.ReadLine();
                 
                 if (input?.ToLower() == "exit") return;
 
-                var pos = Position.Parse(input ?? "");
+                var pos = ParseInput(input ?? "");
                 
                 if (pos == null) 
                 {
@@ -125,6 +126,12 @@ namespace BattleshipWeb
             
             Console.WriteLine("Press any key to close.");
             Console.ReadKey();
+        }
+
+
+        private static Position? ParseInput(string input)
+        {
+            return Position.Parse(input);
         }
     }
 }
