@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using BattleshipWeb.Enums;
 using BattleshipWeb.Interface;
 using BattleshipWeb.Models;
@@ -124,31 +121,10 @@ namespace BattleshipWeb.Models
             ShotResult result = ShotResult.Miss;
             if (cell.Ship != null)
             {
-                // Count hit only if not previously hit? 
-                // Wait, if I shoot same spot twice, does HitCount go up?
-                // Logic should prevent double counting on the ship.
-                // But `cell.IsShot` was just set to true. Use 'wasShot' check before?
-                // No, HitCount is on Ship.
-                // We should check if this specific cell was ALREADY shot before incrementing.
-                // But cell.IsShot is set to true a few lines above.
-                // Using a check before setting IsShot:
-                
-                // Oops, logic flow:
+
             }
             
-            // Correct Logic:
-            // Check if cell was already shot.
-            // If yes, return previous result? Or Miss?
-            // User diagram: IsPositionAlreadyShot.
-            
-            // Let's refine logic based on standard rules.
-            // If IsPositionAlreadyShot, return Miss (or treat as wasted turn).
-            
-            // Actually, I'll rely on the caller to check IsPositionAlreadyShot.
-            // But I should handle the hit counting correctly.
-            // Only increment hit count if this is a NEW hit.
-            
-            // Refetch cell to be sure
+          
             cell = board.Cells[targetPosition.Row, targetPosition.Col];
             bool isNewShot = !cell.IsShot;
             cell.IsShot = true;
