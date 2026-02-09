@@ -8,19 +8,19 @@
     "net10.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Bintang-BC\\.nuget\\packages\\": {}
+    "C:\\Users\\Hp\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Bintang-BC\\Documents\\clone\\Bintang-BC\\Exercise3\\Exercise3.csproj",
+      "projectUniqueName": "C:\\Users\\Hp\\Documents\\Bintang\\Bintang-BC\\Exercise3\\Exercise3.csproj",
       "projectName": "Exercise3",
-      "projectPath": "C:\\Users\\Bintang-BC\\Documents\\clone\\Bintang-BC\\Exercise3\\Exercise3.csproj",
-      "packagesPath": "C:\\Users\\Bintang-BC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Bintang-BC\\Documents\\clone\\Bintang-BC\\Exercise3\\obj\\",
+      "projectPath": "C:\\Users\\Hp\\Documents\\Bintang\\Bintang-BC\\Exercise3\\Exercise3.csproj",
+      "packagesPath": "C:\\Users\\Hp\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Hp\\Documents\\Bintang\\Bintang-BC\\Exercise3\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Bintang-BC\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
@@ -65,7 +65,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",

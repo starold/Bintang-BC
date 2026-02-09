@@ -4,6 +4,7 @@
   </Folder>
   <Project Path="AccessModifiers/AccessModifiers.csproj" />
   <Project Path="BattleshipWeb/BattleshipWeb.csproj" />
+  <Project Path="BattleshipWebAPI/BattleshipWebAPI.csproj" />
   <Project Path="Bintang-BC/Bintang-BC.csproj" />
   <Project Path="C#Basic/C#Basic.csproj" />
   <Project Path="ClassExercise/ClassExercise.csproj" />
@@ -19,4 +20,5 @@
   <Project Path="ObjectTypeExercise/ObjectTypeExercise.csproj" />
   <Project Path="StructExercise/StructExercise.csproj" />
   <Project Path="TesFoobarLagi/TesFoobarLagi.csproj" />
+  <Project Path="WebApplication1/WebApplication1.csproj" />
 </Solution>
