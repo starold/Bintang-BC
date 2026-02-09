@@ -9,11 +9,11 @@ export default function Homepage({ onStartGame }) {
     const handleStart = async (e) => {
         e.preventDefault();
         if (!player1.trim() || !player2.trim()) {
-            setError('Both player names are required');
+            setError('Nama kedua pemain harus diisi');
             return;
         }
         if (player1.trim() === player2.trim()) {
-            setError('Player names must be different');
+            setError('Nama pemain harus berbeda');
             return;
         }
         setLoading(true);
@@ -28,54 +28,82 @@ export default function Homepage({ onStartGame }) {
 
     return (
         <div className="homepage">
-            <h1 className="homepage-title">⚓ Battleship</h1>
-            <p className="homepage-subtitle">The Classic Naval Combat Game</p>
+            <div className="homepage-bg">
+                <div className="floating-element palm-1">🌴</div>
+                <div className="floating-element palm-2">🌴</div>
+                <div className="floating-element tree-1">🌲</div>
+                <div className="floating-element tree-2">🌲</div>
+            </div>
 
-            <form className="player-form" onSubmit={handleStart}>
-                <h2 className="form-title">Enter Player Names</h2>
+            <div className="homepage-content">
+                <h1 className="homepage-title">
+                    <span className="title-word sawit">Sawit</span>
+                    <span className="title-vs">VS</span>
+                    <span className="title-word hutan">Hutan</span>
+                </h1>
+                <p className="homepage-subtitle">Pertempuran Strategis Klasik</p>
 
-                {error && <div className="message error">{error}</div>}
+                <form className="player-form" onSubmit={handleStart}>
+                    <h2 className="form-title">🎮 Mulai Permainan</h2>
 
-                <div className="input-group">
-                    <label htmlFor="player1">Player 1</label>
-                    <input
-                        id="player1"
-                        type="text"
-                        placeholder="Enter name..."
-                        value={player1}
-                        onChange={(e) => setPlayer1(e.target.value)}
-                        disabled={loading}
-                    />
+                    {error && <div className="message error shake">{error}</div>}
+
+                    <div className="input-group">
+                        <label htmlFor="player1">
+                            <span className="player-icon">🌴</span> Pemain 1 (Sawit)
+                        </label>
+                        <input
+                            id="player1"
+                            type="text"
+                            placeholder="Masukkan nama..."
+                            value={player1}
+                            onChange={(e) => setPlayer1(e.target.value)}
+                            disabled={loading}
+                            className="input-sawit"
+                        />
+                    </div>
+
+                    <div className="input-group">
+                        <label htmlFor="player2">
+                            <span className="player-icon">🌲</span> Pemain 2 (Hutan)
+                        </label>
+                        <input
+                            id="player2"
+                            type="text"
+                            placeholder="Masukkan nama..."
+                            value={player2}
+                            onChange={(e) => setPlayer2(e.target.value)}
+                            disabled={loading}
+                            className="input-hutan"
+                        />
+                    </div>
+
+                    <button type="submit" className="btn btn-primary btn-glow" disabled={loading}>
+                        {loading ? (
+                            <span className="loading">
+                                <span className="spinner"></span>
+                                Memulai...
+                            </span>
+                        ) : (
+                            <>⚔️ Mulai Pertempuran!</>
+                        )}
+                    </button>
+                </form>
+
+                <div className="homepage-features">
+                    <div className="feature">
+                        <span className="feature-icon">🎯</span>
+                        <p>Strategi Cerdas</p>
+                    </div>
+                    <div className="feature">
+                        <span className="feature-icon">💥</span>
+                        <p>Aksi Seru</p>
+                    </div>
+                    <div className="feature">
+                        <span className="feature-icon">🏆</span>
+                        <p>Menangkan!</p>
+                    </div>
                 </div>
-
-                <div className="input-group">
-                    <label htmlFor="player2">Player 2</label>
-                    <input
-                        id="player2"
-                        type="text"
-                        placeholder="Enter name..."
-                        value={player2}
-                        onChange={(e) => setPlayer2(e.target.value)}
-                        disabled={loading}
-                    />
-                </div>
-
-                <button type="submit" className="btn btn-primary" disabled={loading}>
-                    {loading ? (
-                        <span className="loading">
-                            <span className="spinner"></span>
-                            Starting...
-                        </span>
-                    ) : (
-                        '🚀 Start Battle'
-                    )}
-                </button>
-            </form>
-
-            <div style={{ marginTop: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-                <p>🎯 Place your ships strategically</p>
-                <p>💥 Take turns attacking the enemy fleet</p>
-                <p>🏆 Sink all ships to win!</p>
             </div>
         </div>
     );

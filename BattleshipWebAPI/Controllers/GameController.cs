@@ -11,13 +11,17 @@ namespace BattleshipWeb.Controllers
     [Route("api/[controller]")]
     public class GameController : ControllerBase
     {
-        // Static field to hold single game instance (no DI, no lock)
-        private static GameService? _currentGame;
+        private readonly GameSessionService _gameSession;
+
+        public GameController(GameSessionService gameSession)
+        {
+            _gameSession = gameSession;
+        }
 
         [HttpPost("create")]
         public ActionResult<GameStateResponse> CreateGame([FromBody] CreateGameRequest request)
         {
-            if (_currentGame != null)
+            if (_gameSession.HasActiveGame)
             {
                 return Conflict(new { error = "Game already exists. Reset first." });
             }
@@ -32,8 +36,8 @@ namespace BattleshipWeb.Controllers
                 return BadRequest(new { error = "Player names must be unique" });
             }
 
-            _currentGame = GameInitializationService.CreateGame(request.PlayerNames);
-            var gameState = _currentGame.GetGameState();
+            _gameSession.CreateGame(request.PlayerNames);
+            var gameState = _gameSession.CurrentGame!.GetGameState();
 
             return Ok(gameState);
         }
@@ -41,30 +45,30 @@ namespace BattleshipWeb.Controllers
         [HttpPost("reset")]
         public ActionResult Reset()
         {
-            _currentGame = null;
+            _gameSession.ResetGame();
             return Ok(new { message = "Game reset successfully" });
         }
 
         [HttpGet("status")]
         public ActionResult GetStatus()
         {
-            return Ok(new { hasActiveGame = _currentGame != null });
+            return Ok(new { hasActiveGame = _gameSession.HasActiveGame });
         }
 
         [HttpGet("state")]
         public ActionResult<GameStateResponse> GetGameState()
         {
-            if (_currentGame == null)
+            if (!_gameSession.HasActiveGame)
                 return NotFound(new { error = "No active game. Create one first." });
 
-            var gameState = _currentGame.GetGameState();
+            var gameState = _gameSession.CurrentGame!.GetGameState();
             return Ok(gameState);
         }
 
         [HttpPost("place-ship")]
         public ActionResult<ActionResultResponse> PlaceShip([FromBody] PlaceShipRequest request)
         {
-            if (_currentGame == null)
+            if (!_gameSession.HasActiveGame)
                 return NotFound(new { error = "No active game" });
 
             // Parse ship type
@@ -80,7 +84,7 @@ namespace BattleshipWeb.Controllers
 
             var position = new Position(request.Row, request.Col);
 
-            var result = _currentGame.PlaceShip(request.PlayerName, shipType, position, orientation);
+            var result = _gameSession.CurrentGame!.PlaceShip(request.PlayerName, shipType, position, orientation);
             if (!result.IsSuccess)
                 return BadRequest(new { error = result.Error?.Message });
 
@@ -96,17 +100,17 @@ namespace BattleshipWeb.Controllers
         [HttpPost("start-battle")]
         public ActionResult<ActionResultResponse> StartBattle()
         {
-            if (_currentGame == null)
+            if (!_gameSession.HasActiveGame)
                 return NotFound(new { error = "No active game" });
 
-            var result = _currentGame.StartBattle();
+            var result = _gameSession.CurrentGame!.StartBattle();
             if (!result.IsSuccess)
                 return BadRequest(new { error = result.Error?.Message });
 
             var dto = new ActionResultResponse
             {
                 Success = true,
-                Message = "Battle phase started! " + _currentGame.CurrentPlayer.Name + " goes first."
+                Message = "Battle phase started! " + _gameSession.CurrentGame.CurrentPlayer.Name + " goes first."
             };
 
             return Ok(dto);
@@ -115,12 +119,12 @@ namespace BattleshipWeb.Controllers
         [HttpPost("fire")]
         public ActionResult<FireShotResponse> Fire([FromBody] FireShotRequest request)
         {
-            if (_currentGame == null)
+            if (!_gameSession.HasActiveGame)
                 return NotFound(new { error = "No active game" });
 
             var position = new Position(request.Row, request.Col);
 
-            var result = _currentGame.FireShot(request.PlayerName, position);
+            var result = _gameSession.CurrentGame!.FireShot(request.PlayerName, position);
             if (!result.IsSuccess)
                 return BadRequest(new { error = result.Error?.Message });
 
@@ -130,19 +134,19 @@ namespace BattleshipWeb.Controllers
         [HttpPost("end-turn")]
         public ActionResult<ActionResultResponse> EndTurn([FromBody] PlayerActionRequest request)
         {
-            if (_currentGame == null)
+            if (!_gameSession.HasActiveGame)
                 return NotFound(new { error = "No active game" });
 
-            var validateResult = _currentGame.ValidatePlayerTurn(request.PlayerName);
+            var validateResult = _gameSession.CurrentGame!.ValidatePlayerTurn(request.PlayerName);
             if (!validateResult.IsSuccess)
                 return BadRequest(new { error = validateResult.Error?.Message });
 
-            _currentGame.SwitchTurn();
+            _gameSession.CurrentGame.SwitchTurn();
 
             var dto = new ActionResultResponse
             {
                 Success = true,
-                Message = $"Turn ended. Now it's {_currentGame.CurrentPlayer.Name}'s turn."
+                Message = $"Turn ended. Now it's {_gameSession.CurrentGame.CurrentPlayer.Name}'s turn."
             };
 
             return Ok(dto);
@@ -151,15 +155,16 @@ namespace BattleshipWeb.Controllers
         [HttpGet("board/{playerName}")]
         public ActionResult<BoardResponse> GetPlayerBoard(string playerName, [FromQuery] bool hideShips = false)
         {
-            if (_currentGame == null)
+            if (!_gameSession.HasActiveGame)
                 return NotFound(new { error = "No active game" });
 
-            var player = _currentGame.GetPlayer(playerName);
+            var player = _gameSession.CurrentGame!.GetPlayer(playerName);
             if (player == null)
                 return NotFound(new { error = $"Player '{playerName}' not found" });
 
-            var board = _currentGame.GetBoardResponse(player, hideShips);
+            var board = _gameSession.CurrentGame.GetBoardResponse(player, hideShips);
             return Ok(board);
         }
     }
 }
+

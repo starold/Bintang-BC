@@ -27,19 +27,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Hp\\.nuget\\packages\\": {}
+    "C:\\Users\\Bintang-BC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Hp\\Documents\\Bintang\\Bintang-BC\\TesFoobarLagi\\TesFoobarLagi.csproj",
+      "projectUniqueName": "C:\\Users\\Bintang-BC\\Documents\\clone\\Bintang-BC\\TesFoobarLagi\\TesFoobarLagi.csproj",
       "projectName": "TesFoobarLagi",
-      "projectPath": "C:\\Users\\Hp\\Documents\\Bintang\\Bintang-BC\\TesFoobarLagi\\TesFoobarLagi.csproj",
-      "packagesPath": "C:\\Users\\Hp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Hp\\Documents\\Bintang\\Bintang-BC\\TesFoobarLagi\\obj\\",
+      "projectPath": "C:\\Users\\Bintang-BC\\Documents\\clone\\Bintang-BC\\TesFoobarLagi\\TesFoobarLagi.csproj",
+      "packagesPath": "C:\\Users\\Bintang-BC\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Bintang-BC\\Documents\\clone\\Bintang-BC\\TesFoobarLagi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Bintang-BC\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
@@ -51,8 +51,8 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "C:\\Users\\Hp\\Documents\\Bintang\\Bintang-BC\\Exercise1\\Exercise1.csproj": {
-              "projectPath": "C:\\Users\\Hp\\Documents\\Bintang\\Bintang-BC\\Exercise1\\Exercise1.csproj"
+            "C:\\Users\\Bintang-BC\\Documents\\clone\\Bintang-BC\\Exercise1\\Exercise1.csproj": {
+              "projectPath": "C:\\Users\\Bintang-BC\\Documents\\clone\\Bintang-BC\\Exercise1\\Exercise1.csproj"
             }
           }
         }
@@ -88,7 +88,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",

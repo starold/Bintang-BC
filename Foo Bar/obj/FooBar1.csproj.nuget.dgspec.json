@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Hp\\Documents\\Bintang\\Bintang-BC\\Foo Bar\\FooBar1.csproj": {}
+    "C:\\Users\\Bintang-BC\\Documents\\clone\\Bintang-BC\\Foo Bar\\FooBar1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Hp\\Documents\\Bintang\\Bintang-BC\\Foo Bar\\FooBar1.csproj": {
+    "C:\\Users\\Bintang-BC\\Documents\\clone\\Bintang-BC\\Foo Bar\\FooBar1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Hp\\Documents\\Bintang\\Bintang-BC\\Foo Bar\\FooBar1.csproj",
+        "projectUniqueName": "C:\\Users\\Bintang-BC\\Documents\\clone\\Bintang-BC\\Foo Bar\\FooBar1.csproj",
         "projectName": "FooBar1",
-        "projectPath": "C:\\Users\\Hp\\Documents\\Bintang\\Bintang-BC\\Foo Bar\\FooBar1.csproj",
-        "packagesPath": "C:\\Users\\Hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Hp\\Documents\\Bintang\\Bintang-BC\\Foo Bar\\obj\\",
+        "projectPath": "C:\\Users\\Bintang-BC\\Documents\\clone\\Bintang-BC\\Foo Bar\\FooBar1.csproj",
+        "packagesPath": "C:\\Users\\Bintang-BC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Bintang-BC\\Documents\\clone\\Bintang-BC\\Foo Bar\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Bintang-BC\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

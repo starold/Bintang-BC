@@ -8,19 +8,19 @@
     "net10.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Hp\\.nuget\\packages\\": {}
+    "C:\\Users\\Bintang-BC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Hp\\Documents\\Bintang\\Bintang-BC\\WebApplication1\\WebApplication1.csproj",
+      "projectUniqueName": "C:\\Users\\Bintang-BC\\Documents\\clone\\Bintang-BC\\WebApplication1\\WebApplication1.csproj",
       "projectName": "WebApplication1",
-      "projectPath": "C:\\Users\\Hp\\Documents\\Bintang\\Bintang-BC\\WebApplication1\\WebApplication1.csproj",
-      "packagesPath": "C:\\Users\\Hp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Hp\\Documents\\Bintang\\Bintang-BC\\WebApplication1\\obj\\",
+      "projectPath": "C:\\Users\\Bintang-BC\\Documents\\clone\\Bintang-BC\\WebApplication1\\WebApplication1.csproj",
+      "packagesPath": "C:\\Users\\Bintang-BC\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Bintang-BC\\Documents\\clone\\Bintang-BC\\WebApplication1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Bintang-BC\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
@@ -68,7 +68,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

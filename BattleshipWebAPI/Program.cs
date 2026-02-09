@@ -3,14 +3,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<BattleshipWeb.Services.GameSessionService>();
 
 // CORS for React frontend
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
     {
-        policy.WithOrigins("http://localhost:3000", "http://localhost:5173") // React dev servers (Vite & CRA)
+        policy.WithOrigins("http://localhost:3000", "http://localhost:5175", "http://localhost:5174", "http://localhost:5173") // React dev servers (Vite & CRA)
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
