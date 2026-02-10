@@ -1,0 +1,6 @@
+@testserilog_HostAddress = http://localhost:5197
+
+GET {{testserilog_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

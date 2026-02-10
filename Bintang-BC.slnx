@@ -20,5 +20,6 @@
   <Project Path="ObjectTypeExercise/ObjectTypeExercise.csproj" />
   <Project Path="StructExercise/StructExercise.csproj" />
   <Project Path="TesFoobarLagi/TesFoobarLagi.csproj" />
+  <Project Path="testserilog/testserilog.csproj" />
   <Project Path="WebApplication1/WebApplication1.csproj" />
 </Solution>
