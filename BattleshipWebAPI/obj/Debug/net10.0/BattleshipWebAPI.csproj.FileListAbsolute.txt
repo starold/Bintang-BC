@@ -72,3 +72,13 @@ C:\Users\Bintang-BC\Documents\clone\Bintang-BC\BattleshipWebAPI\obj\Debug\net10.
 C:\Users\Bintang-BC\Documents\clone\Bintang-BC\BattleshipWebAPI\obj\Debug\net10.0\BattleshipWebAPI.pdb
 C:\Users\Bintang-BC\Documents\clone\Bintang-BC\BattleshipWebAPI\obj\Debug\net10.0\BattleshipWebAPI.genruntimeconfig.cache
 C:\Users\Bintang-BC\Documents\clone\Bintang-BC\BattleshipWebAPI\obj\Debug\net10.0\ref\BattleshipWebAPI.dll
+C:\Users\Hp\Documents\Bintang\Bintang-BC\BattleshipWebAPI\bin\Debug\net10.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Hp\Documents\Bintang\Bintang-BC\BattleshipWebAPI\bin\Debug\net10.0\Serilog.dll
+C:\Users\Hp\Documents\Bintang\Bintang-BC\BattleshipWebAPI\bin\Debug\net10.0\Serilog.AspNetCore.dll
+C:\Users\Hp\Documents\Bintang\Bintang-BC\BattleshipWebAPI\bin\Debug\net10.0\Serilog.Extensions.Hosting.dll
+C:\Users\Hp\Documents\Bintang\Bintang-BC\BattleshipWebAPI\bin\Debug\net10.0\Serilog.Extensions.Logging.dll
+C:\Users\Hp\Documents\Bintang\Bintang-BC\BattleshipWebAPI\bin\Debug\net10.0\Serilog.Formatting.Compact.dll
+C:\Users\Hp\Documents\Bintang\Bintang-BC\BattleshipWebAPI\bin\Debug\net10.0\Serilog.Settings.Configuration.dll
+C:\Users\Hp\Documents\Bintang\Bintang-BC\BattleshipWebAPI\bin\Debug\net10.0\Serilog.Sinks.Console.dll
+C:\Users\Hp\Documents\Bintang\Bintang-BC\BattleshipWebAPI\bin\Debug\net10.0\Serilog.Sinks.Debug.dll
+C:\Users\Hp\Documents\Bintang\Bintang-BC\BattleshipWebAPI\bin\Debug\net10.0\Serilog.Sinks.File.dll

@@ -5,9 +5,12 @@ namespace BattleshipWeb.Services
     using BattleshipWeb.Models;
     using BattleshipWeb.Common;
     using BattleshipWeb.DTOs.Responses;
+    using Microsoft.Extensions.Logging;
 
     public class GameService
     {
+        private readonly ILogger<GameService> _logger;
+
         private List<IPlayer> _players;
         private Dictionary<IPlayer, IBoard> _boards;
         private Dictionary<IPlayer, List<IShip>> _playerShips;
@@ -15,11 +18,13 @@ namespace BattleshipWeb.Services
         public GameState State { get; private set; }
         public IPlayer? Winner { get; private set; }
         
+        
         private const int BOARD_SIZE = 10;
         private const int SHIPS_PER_PLAYER = 3; // Carrier, Battleship, Cruiser
 
-        public GameService(List<IPlayer> players)
+        public GameService(List<IPlayer> players, ILogger<GameService> logger) 
         {
+            _logger = logger;
             _players = players;
             _boards = new Dictionary<IPlayer, IBoard>();
             _playerShips = new Dictionary<IPlayer, List<IShip>>();
@@ -33,20 +38,38 @@ namespace BattleshipWeb.Services
             }
 
             CurrentPlayer = _players.FirstOrDefault()!;
+
+            _logger.LogInformation(
+                "Game diinisialisasi dan dimuladi dari {@Players}",
+                _players.Select(p => p.Name)
+            );
         }
 
         public ServiceResult<IPlayer> ValidatePlayerTurn(string playerName)
         {
             var player = _players.FirstOrDefault(p => p.Name == playerName);
             if (player == null)
+            {
+                _logger.LogWarning(
+                    "Validasi giliran salah. Giliran {Player}",
+                    playerName
+                );
                 return ServiceResult<IPlayer>.Fail(
                     new ServiceError(ErrorType.Validation, $"Player '{playerName}' not found.")
                 );
+            }
 
             if (CurrentPlayer != player)
+            {
+                _logger.LogWarning(
+                    "Bukan giliran {Player}, sekarang giliran {Current}",
+                    playerName,
+                    CurrentPlayer.Name
+                );
                 return ServiceResult<IPlayer>.Fail(
                     new ServiceError(ErrorType.Validation, $"It's not {playerName}'s turn. Current player is {CurrentPlayer.Name}.")
                 );
+            }
 
             return ServiceResult<IPlayer>.Success(player);
         }
@@ -59,31 +82,54 @@ namespace BattleshipWeb.Services
         public ServiceResult<bool> PlaceShip(string playerName, ShipType shipType, Position position, Orientation orientation)
         {
             if (State != GameState.Setup)
+            {
+                _logger.LogWarning(
+                    "Penempatan kapal dilakukan diluar fase oleh {Player}",
+                    playerName
+                );
                 return ServiceResult<bool>.Fail(
                     new ServiceError(ErrorType.Validation, "Cannot place ships outside of Setup phase.")
                 );
+            }
 
             var player = GetPlayer(playerName);
             if (player == null)
+            {
+                _logger.LogWarning(
+                    "{Player} tidak ada",
+                    playerName
+                );
                 return ServiceResult<bool>.Fail(
                     new ServiceError(ErrorType.NotFound, $"Player '{playerName}' not found.")
                 );
+            }
 
             var board = _boards[player];
             var ship = new Ship(shipType);
 
             // Check if this ship type is already placed
             if (_playerShips[player].Any(s => s.ShipType == shipType))
+            {
+                _logger.LogWarning(
+                    "{Player} mencoba duplikasi kapal {ShipType}",
+                    playerName, shipType
+                );
                 return ServiceResult<bool>.Fail(
                     new ServiceError(ErrorType.Validation, $"Ship type {shipType} is already placed.")
                 );
+            }
 
             // Validate placement
             if (!IsValidShipPlacement(board, ship, position, orientation))
+            {
+                _logger.LogWarning(
+                    "{Player} menaruh kapal ditempat yang salah untuk kapal {ShipType} at {@Position}",
+                    playerName, shipType, position
+                );
                 return ServiceResult<bool>.Fail(
                     new ServiceError(ErrorType.Validation, "Invalid ship placement. Out of bounds or overlapping with another ship.")
                 );
-
+            }
             // Place the ship
             int r = position.Row;
             int c = position.Col;
@@ -95,8 +141,13 @@ namespace BattleshipWeb.Services
                 else
                     board.Cells[r + i, c].Ship = ship;
             }
-
+            
             _playerShips[player].Add(ship);
+
+            _logger.LogInformation(
+                "{Player} telah menaruh kapal {ShipType} di posisi {@Position} dan {Orientation} dengan benar.",
+                playerName, shipType, position, orientation
+            );
 
             return ServiceResult<bool>.Success(true);
         }
@@ -133,9 +184,15 @@ namespace BattleshipWeb.Services
             foreach (var player in _players)
             {
                 if (_playerShips[player].Count < SHIPS_PER_PLAYER)
+                {
+                    _logger.LogWarning(
+                        "Peperangan gagal.{Player} gagal menaruh kapal",
+                        player.Name
+                    );
                     return ServiceResult<bool>.Fail(
                         new ServiceError(ErrorType.Validation, $"Player {player.Name} has not placed all ships yet.")
                     );
+                }
             }
 
             State = GameState.Battle;
@@ -146,9 +203,15 @@ namespace BattleshipWeb.Services
         public ServiceResult<FireShotResponse> FireShot(string playerName, Position targetPosition)
         {
             if (State != GameState.Battle)
+            {
+                _logger.LogWarning(
+                    "Tembakan ditaruh diluar battlephase oleh {Player}",
+                    playerName
+                );
                 return ServiceResult<FireShotResponse>.Fail(
                     new ServiceError(ErrorType.Validation, "Cannot fire shots outside of Battle phase.")
                 );
+            }
 
             var validateResult = ValidatePlayerTurn(playerName);
             if (!validateResult.IsSuccess)
@@ -169,9 +232,14 @@ namespace BattleshipWeb.Services
 
             // Check if already shot
             if (cell.IsShot)
+            {
+                _logger.LogWarning(
+                    "(Player) mencoba menembak cell (@Target), tapi sudah ditembak."
+                );
                 return ServiceResult<FireShotResponse>.Fail(
                     new ServiceError(ErrorType.Validation, "This position has already been shot.")
                 );
+            }
 
             cell.IsShot = true;
 
@@ -196,6 +264,12 @@ namespace BattleshipWeb.Services
                 {
                     response.Result = "Hit";
                 }
+                _logger.LogInformation(
+                    "{Player} telah menembak {@Target} dengan hasil {Result}",
+                    playerName,
+                    targetPosition,
+                    response.Result
+                );
             }
 
             // Check for winner
@@ -206,6 +280,11 @@ namespace BattleshipWeb.Services
                 Winner = winner;
                 response.IsGameOver = true;
                 response.WinnerName = winner.Name;
+
+                _logger.LogInformation(
+                    "Game selesai. Pemenangnya adalah {Winner}",
+                    Winner.Name
+                );
             }
 
             return ServiceResult<FireShotResponse>.Success(response);
@@ -214,6 +293,10 @@ namespace BattleshipWeb.Services
         public void SwitchTurn()
         {
             CurrentPlayer = _players.First(p => p != CurrentPlayer);
+            _logger.LogInformation(
+                "Ganti giliran. Sekarang giliran {Player}",
+                CurrentPlayer.Name
+            );
         }
 
         private bool IsShipSunk(IShip ship)
