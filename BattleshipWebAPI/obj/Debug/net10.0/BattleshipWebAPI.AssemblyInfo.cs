@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BattleshipWebAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+483a1a89d57018b15783f79951605fe6e7073511")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+790f4241ac70520ae77118d06dc3499db58d069d")]
 [assembly: System.Reflection.AssemblyProductAttribute("BattleshipWebAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BattleshipWebAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

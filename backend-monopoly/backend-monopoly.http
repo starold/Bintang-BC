@@ -1,6 +1,0 @@
-@backend_monopoly_HostAddress = http://localhost:5278
-
-GET {{backend_monopoly_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

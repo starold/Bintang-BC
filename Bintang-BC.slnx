@@ -22,4 +22,6 @@
   <Project Path="TesFoobarLagi/TesFoobarLagi.csproj" />
   <Project Path="testserilog/testserilog.csproj" />
   <Project Path="WebApplication1/WebApplication1.csproj" />
+  <Project Path="BattleshipWebAPI.Tests/BattleshipWebAPI.Tests.csproj" />
+  <Project Path="AITest/AITest.csproj" />
 </Solution>

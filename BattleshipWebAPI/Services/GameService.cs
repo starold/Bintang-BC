@@ -50,10 +50,6 @@ namespace BattleshipWeb.Services
             var player = _players.FirstOrDefault(p => p.Name == playerName);
             if (player == null)
             {
-                _logger.LogWarning(
-                    "Validasi giliran salah. Giliran {Player}",
-                    playerName
-                );
                 return ServiceResult<IPlayer>.Fail(
                     new ServiceError(ErrorType.Validation, $"Player '{playerName}' not found.")
                 );
@@ -61,11 +57,8 @@ namespace BattleshipWeb.Services
 
             if (CurrentPlayer != player)
             {
-                _logger.LogWarning(
-                    "Bukan giliran {Player}, sekarang giliran {Current}",
-                    playerName,
-                    CurrentPlayer.Name
-                );
+                
+                
                 return ServiceResult<IPlayer>.Fail(
                     new ServiceError(ErrorType.Validation, $"It's not {playerName}'s turn. Current player is {CurrentPlayer.Name}.")
                 );
@@ -83,10 +76,6 @@ namespace BattleshipWeb.Services
         {
             if (State != GameState.Setup)
             {
-                _logger.LogWarning(
-                    "Penempatan kapal dilakukan diluar fase oleh {Player}",
-                    playerName
-                );
                 return ServiceResult<bool>.Fail(
                     new ServiceError(ErrorType.Validation, "Cannot place ships outside of Setup phase.")
                 );
@@ -95,10 +84,7 @@ namespace BattleshipWeb.Services
             var player = GetPlayer(playerName);
             if (player == null)
             {
-                _logger.LogWarning(
-                    "{Player} tidak ada",
-                    playerName
-                );
+            
                 return ServiceResult<bool>.Fail(
                     new ServiceError(ErrorType.NotFound, $"Player '{playerName}' not found.")
                 );
@@ -110,10 +96,7 @@ namespace BattleshipWeb.Services
             // Check if this ship type is already placed
             if (_playerShips[player].Any(s => s.ShipType == shipType))
             {
-                _logger.LogWarning(
-                    "{Player} mencoba duplikasi kapal {ShipType}",
-                    playerName, shipType
-                );
+
                 return ServiceResult<bool>.Fail(
                     new ServiceError(ErrorType.Validation, $"Ship type {shipType} is already placed.")
                 );
