@@ -8,7 +8,7 @@ using BattleshipWeb.Enums;
 using BattleshipWeb.Common;
 using BattleshipWeb.DTOs.Responses;
 using System.Collections.Generic;
-using System.Linq;
+
 
 namespace BattleshipWebAPI.Tests
 {
