@@ -1,13 +1,12 @@
 <Solution>
-  <Folder Name="/Foo Bar/">
-    <Project Path="Foo Bar/FooBar1.csproj" />
-  </Folder>
+  <Project Path="Foo Bar/FooBar1.csproj" />
   <Project Path="AccessModifiers/AccessModifiers.csproj" />
   <Project Path="BattleshipWeb/BattleshipWeb.csproj" />
   <Project Path="BattleshipWebAPI/BattleshipWebAPI.csproj" />
   <Project Path="Bintang-BC/Bintang-BC.csproj" />
   <Project Path="C#Basic/C#Basic.csproj" />
   <Project Path="ClassExercise/ClassExercise.csproj" />
+  <Project Path="coba/coba.csproj" />
   <Project Path="CombineExercise/CombineExercise.csproj" />
   <Project Path="DisposalAndGC/DisposalAndGC.csproj" />
   <Project Path="ExampleArray/ExampleArray.csproj" />
@@ -18,10 +17,13 @@
   <Project Path="InheritanceExercise/InheritanceExercise.csproj" />
   <Project Path="Logic Exercise/Logic Exercise.csproj" />
   <Project Path="ObjectTypeExercise/ObjectTypeExercise.csproj" />
+  <Project Path="SekolahCRUD/SekolahCRUD.csproj" />
   <Project Path="StructExercise/StructExercise.csproj" />
   <Project Path="TesFoobarLagi/TesFoobarLagi.csproj" />
   <Project Path="testserilog/testserilog.csproj" />
   <Project Path="WebApplication1/WebApplication1.csproj" />
   <Project Path="BattleshipWebAPI.Tests/BattleshipWebAPI.Tests.csproj" />
   <Project Path="AITest/AITest.csproj" />
+  <Project Path="123/123.csproj" />
+  <Project Path="FormulirPendaftaranSekolahCRUD/FormulirPendaftaranSekolahCRUD.csproj" />
 </Solution>
