@@ -8,6 +8,7 @@
   <Project Path="ClassExercise/ClassExercise.csproj" />
   <Project Path="coba/coba.csproj" />
   <Project Path="CombineExercise/CombineExercise.csproj" />
+  <Project Path="DaftarSekolahCRUD/DaftarSekolahCRUD.csproj" />
   <Project Path="DisposalAndGC/DisposalAndGC.csproj" />
   <Project Path="ExampleArray/ExampleArray.csproj" />
   <Project Path="Exercise1/Exercise1.csproj" />
