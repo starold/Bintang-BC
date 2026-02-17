@@ -1,13 +1,14 @@
-using DaftarSekolahCRUD.Application.DTOs;
-using DaftarSekolahCRUD.Application.Services;
-using DaftarSekolahCRUD.Domain.Entities;
+using DaftarSekolahCRUD.Application.DTOs.Student;
+using DaftarSekolahCRUD.Shared;
 
 namespace DaftarSekolahCRUD.Application.Interfaces
 {
     public interface IStudentService
     {
-        Task<ServiceResult<Guid>> CreateAsync(CreateStudentDto dto);
-        Task<ServiceResult<List<Student>>> GetAllAsync();
+        Task<ServiceResult<StudentResponseDto>> RegisterAsync(RegisterStudentDto dto);
+        Task<ServiceResult<List<StudentResponseDto>>> GetAllAsync();
+        Task<ServiceResult<StudentResponseDto>> GetByIdAsync(Guid id);
+        Task<ServiceResult<StudentResponseDto>> UpdateAsync(Guid id, UpdateStudentDto dto);
         Task<ServiceResult<bool>> DeleteAsync(Guid id);
     }
 }

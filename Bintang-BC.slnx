@@ -27,4 +27,7 @@
   <Project Path="AITest/AITest.csproj" />
   <Project Path="123/123.csproj" />
   <Project Path="FormulirPendaftaranSekolahCRUD/FormulirPendaftaranSekolahCRUD.csproj" />
+  <Project Path="FormulirPendaftaranSekolahCRUD/FormulirPendaftaranSekolahCRUD.csproj" />
+  <Project Path="SekolahCRUD
+  <Project Path="SekolahFixCRUD/SekolahFixCRUD.csproj" />
 </Solution>

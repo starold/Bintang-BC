@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Dokumentasi DaftarSekolahCRUD - Clean Architecture Web API</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;line-height:1.7;color:#1e293b;background:#f8fafc;padding:40px}
+.container{max-width:900px;margin:0 auto;background:#fff;padding:50px 60px;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+h1{font-size:28px;font-weight:700;color:#0f172a;border-bottom:3px solid #3b82f6;padding-bottom:12px;margin-bottom:8px}
+h2{font-size:22px;font-weight:600;color:#1e40af;margin-top:36px;margin-bottom:12px;border-left:4px solid #3b82f6;padding-left:12px}
+h3{font-size:17px;font-weight:600;color:#334155;margin-top:20px;margin-bottom:8px}
+h4{font-size:15px;font-weight:600;color:#475569;margin-top:14px;margin-bottom:6px}
+p{margin-bottom:10px;font-size:14px}
+ul,ol{margin:8px 0 12px 24px;font-size:14px}
+li{margin-bottom:4px}
+code{font-family:'JetBrains Mono',monospace;background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:13px;color:#dc2626}
+pre{background:#1e293b;color:#e2e8f0;padding:16px 20px;border-radius:8px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.6;margin:10px 0 16px}
+pre code{background:none;color:inherit;padding:0}
+table{width:100%;border-collapse:collapse;margin:12px 0 18px;font-size:13px}
+th{background:#3b82f6;color:#fff;padding:10px 14px;text-align:left;font-weight:600}
+td{padding:8px 14px;border-bottom:1px solid #e2e8f0}
+tr:nth-child(even){background:#f8fafc}
+.badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:11px;font-weight:600;margin-right:4px}
+.badge-blue{background:#dbeafe;color:#1e40af}
+.badge-green{background:#dcfce7;color:#166534}
+.badge-orange{background:#ffedd5;color:#9a3412}
+.badge-purple{background:#f3e8ff;color:#6b21a8}
+.badge-red{background:#fee2e2;color:#991b1b}
+.info-box{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:14px 18px;margin:12px 0;font-size:13px}
+.warn-box{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:14px 18px;margin:12px 0;font-size:13px}
+.tree{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px 20px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.8;margin:12px 0}
+.page-break{page-break-before:always}
+@media print{body{padding:0;background:#fff}.container{box-shadow:none;padding:30px 40px}pre{font-size:11px}h2{page-break-after:avoid}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>📚 Dokumentasi Lengkap DaftarSekolahCRUD</h1>
+<p><strong>Web API CRUD Clean Architecture</strong> — .NET 10 | EF Core SQLite | JWT Authentication</p>
+<p style="color:#64748b;font-size:13px">Dibuat: 15 Februari 2026 | Versi: 1.0</p>
+
+<!-- ==================== DAFTAR ISI ==================== -->
+<h2>📋 Daftar Isi</h2>
+<ol>
+<li><a href="#overview">Overview &amp; Clean Architecture</a></li>
+<li><a href="#structure">Project Structure</a></li>
+<li><a href="#install">Langkah-Langkah Instalasi</a></li>
+<li><a href="#packages">NuGet Packages</a></li>
+<li><a href="#domain">Domain Layer</a></li>
+<li><a href="#app">Application Layer</a></li>
+<li><a href="#infra">Infrastructure Layer</a></li>
+<li><a href="#presentation">Presentation Layer</a></li>
+<li><a href="#shared">Shared Layer</a></li>
+<li><a href="#relationships">Database Relationships</a></li>
+<li><a href="#fluentapi">Fluent API Configuration</a></li>
+<li><a href="#repo-pattern">Repository Design Pattern</a></li>
+<li><a href="#dto-mapper">DTO &amp; AutoMapper</a></li>
+<li><a href="#jwt">JWT Authentication</a></li>
+<li><a href="#service-result">ServiceResult&lt;T&gt; Pattern</a></li>
+<li><a href="#endpoints">API Endpoints</a></li>
+<li><a href="#testing">Testing dengan Swagger</a></li>
+</ol>
+
+<!-- ==================== 1. OVERVIEW ==================== -->
+<h2 id="overview">1. Overview &amp; Clean Architecture</h2>
+<p>Project ini adalah <strong>Web API CRUD</strong> untuk pendaftaran sekolah yang dibangun menggunakan prinsip <strong>Clean Architecture</strong> dari Robert C. Martin (Uncle Bob). Clean Architecture memisahkan kode menjadi layer-layer independen dengan aturan <em>Dependency Rule</em>: dependensi hanya boleh mengarah ke dalam (ke domain).</p>
+
+<div class="info-box">
+<strong>🎯 Prinsip Utama Clean Architecture:</strong><br>
+• <strong>Domain Layer</strong> (paling dalam) — Entities &amp; Repository Interfaces, tidak bergantung pada apapun<br>
+• <strong>Application Layer</strong> — Use Cases, DTOs, Service Interfaces &amp; Implementations<br>
+• <strong>Infrastructure Layer</strong> — Database, External Services, Repository Implementations<br>
+• <strong>Presentation Layer</strong> (paling luar) — Controllers, Program.cs
+</div>
+
+<!-- ==================== 2. PROJECT STRUCTURE ==================== -->
+<h2 id="structure">2. Project Structure</h2>
+<div class="tree">
+DaftarSekolahCRUD/
+├── Domain/                          <span style="color:#64748b">← Layer paling dalam (Entities)</span>
+│   ├── Entities/
+│   │   ├── Student.cs
+│   │   ├── StudentProfile.cs
+│   │   ├── ClassRoom.cs
+│   │   ├── Extracurricular.cs
+│   │   ├── StudentExtracurricular.cs
+│   │   └── User.cs
+│   └── Repositories/
+│       ├── IStudentRepository.cs
+│       └── IAuthRepository.cs
+├── Application/                     <span style="color:#64748b">← Use Cases &amp; Business Logic</span>
+│   ├── DTOs/
+│   │   ├── Auth/
+│   │   │   ├── LoginDto.cs
+│   │   │   └── RegisterUserDto.cs
+│   │   └── Student/
+│   │       ├── RegisterStudentDto.cs
+│   │       ├── StudentResponseDto.cs
+│   │       └── UpdateStudent.cs
+│   ├── Interfaces/
+│   │   ├── IStudentService.cs
+│   │   └── IAuthService.cs
+│   ├── Mapping/
+│   │   └── MappingProfile.cs
+│   └── Services/
+│       ├── StudentService.cs
+│       └── AuthService.cs
+├── Infrastructure/                  <span style="color:#64748b">← Implementasi teknis</span>
+│   ├── Authentication/
+│   │   └── JwtService.cs
+│   ├── Persistence/
+│   │   └── AppDbContext.cs
+│   └── Repositories/
+│       ├── StudentRepository.cs
+│       └── AuthRepository.cs
+├── Controllers/                     <span style="color:#64748b">← API Endpoints</span>
+│   ├── StudentController.cs
+│   └── AuthController.cs
+├── Shared/                          <span style="color:#64748b">← Cross-cutting concerns</span>
+│   └── ServiceResult.cs
+├── Program.cs
+├── appsettings.json
+└── DaftarSekolahCRUD.csproj
+</div>
+
+<!-- ==================== 3. INSTALASI ==================== -->
+<h2 id="install">3. Langkah-Langkah Instalasi</h2>
+
+<h3>3.1 Prasyarat (Prerequisites)</h3>
+<table>
+<tr><th>Software</th><th>Versi Minimum</th><th>Download</th></tr>
+<tr><td>.NET SDK</td><td>10.0</td><td>https://dotnet.microsoft.com/download</td></tr>
+<tr><td>Visual Studio Code / Visual Studio</td><td>Latest</td><td>https://code.visualstudio.com</td></tr>
+<tr><td>Git</td><td>2.x</td><td>https://git-scm.com</td></tr>
+</table>
+
+<h3>3.2 Langkah Instalasi</h3>
+<h4>Step 1: Verifikasi .NET SDK</h4>
+<pre><code>dotnet --version
+# Output yang diharapkan: 10.0.x atau lebih tinggi</code></pre>
+
+<h4>Step 2: Clone / Navigasi ke Project</h4>
+<pre><code>cd DaftarSekolahCRUD</code></pre>
+
+<h4>Step 3: Restore NuGet Packages</h4>
+<pre><code>dotnet restore</code></pre>
+
+<h4>Step 4: Build Project</h4>
+<pre><code>dotnet build</code></pre>
+
+<h4>Step 5: Jalankan Web API</h4>
+<pre><code>dotnet run</code></pre>
+<p>API akan berjalan di <code>http://localhost:5000</code> (atau port yang ditentukan). Database SQLite (<code>DaftarSekolah.db</code>) akan otomatis dibuat saat pertama kali dijalankan, termasuk seed data untuk ClassRoom dan Extracurricular.</p>
+
+<h4>Step 6: Buka Swagger UI</h4>
+<pre><code># Buka browser ke:
+http://localhost:{port}/swagger</code></pre>
+
+<h3>3.3 Instalasi NuGet Packages (Manual)</h3>
+<p>Jika ingin menginstal package satu per satu:</p>
+<pre><code>dotnet add package AutoMapper --version 12.0.1
+dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection --version 12.0.1
+dotnet add package BCrypt.Net-Next --version 4.0.3
+dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 10.0.3
+dotnet add package Microsoft.EntityFrameworkCore --version 10.0.3
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 10.0.3
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 10.0.3
+dotnet add package Swashbuckle.AspNetCore --version 7.3.1</code></pre>
+
+<!-- ==================== 4. NUGET PACKAGES ==================== -->
+<h2 id="packages">4. NuGet Packages</h2>
+<table>
+<tr><th>Package</th><th>Versi</th><th>Fungsi</th></tr>
+<tr><td><code>AutoMapper</code></td><td>12.0.1</td><td>Object-to-object mapping (Entity ↔ DTO)</td></tr>
+<tr><td><code>AutoMapper.Extensions.Microsoft.DependencyInjection</code></td><td>12.0.1</td><td>DI registration untuk AutoMapper</td></tr>
+<tr><td><code>BCrypt.Net-Next</code></td><td>4.0.3</td><td>Password hashing untuk autentikasi</td></tr>
+<tr><td><code>Microsoft.AspNetCore.Authentication.JwtBearer</code></td><td>10.0.3</td><td>JWT Bearer token authentication middleware</td></tr>
+<tr><td><code>Microsoft.EntityFrameworkCore</code></td><td>10.0.3</td><td>ORM utama untuk akses database</td></tr>
+<tr><td><code>Microsoft.EntityFrameworkCore.Design</code></td><td>10.0.3</td><td>Design-time tools (migrations)</td></tr>
+<tr><td><code>Microsoft.EntityFrameworkCore.Sqlite</code></td><td>10.0.3</td><td>Provider database SQLite</td></tr>
+<tr><td><code>Swashbuckle.AspNetCore</code></td><td>7.3.1</td><td>Swagger/OpenAPI documentation &amp; UI</td></tr>
+</table>
+
+<!-- ==================== 5. DOMAIN LAYER ==================== -->
+<div class="page-break"></div>
+<h2 id="domain">5. Domain Layer</h2>
+<p><span class="badge badge-blue">Namespace</span> <code>DaftarSekolahCRUD.Domain.Entities</code> dan <code>DaftarSekolahCRUD.Domain.Repositories</code></p>
+<p>Layer ini berisi entity (model domain) dan interface repository. Layer ini <strong>tidak bergantung</strong> pada layer lain.</p>
+
+<h3>5.1 Student.cs</h3>
+<p><span class="badge badge-green">Entity</span> Entitas utama yang merepresentasikan data siswa.</p>
+<table>
+<tr><th>Property</th><th>Tipe</th><th>Penjelasan</th></tr>
+<tr><td><code>Id</code></td><td>Guid</td><td>Primary Key unik (GUID)</td></tr>
+<tr><td><code>NIS</code></td><td>string</td><td>Nomor Induk Siswa</td></tr>
+<tr><td><code>Name</code></td><td>string</td><td>Nama lengkap siswa</td></tr>
+<tr><td><code>ClassRoomId</code></td><td>Guid</td><td>Foreign Key ke ClassRoom (One-to-Many)</td></tr>
+<tr><td><code>ClassRoom</code></td><td>ClassRoom</td><td>Navigation property ke kelas</td></tr>
+<tr><td><code>Profile</code></td><td>StudentProfile</td><td>Navigation property 1:1 ke profil siswa</td></tr>
+<tr><td><code>StudentExtracurriculars</code></td><td>ICollection&lt;StudentExtracurricular&gt;</td><td>Navigation property M:N ke ekstrakurikuler</td></tr>
+</table>
+
+<h3>5.2 StudentProfile.cs</h3>
+<p><span class="badge badge-green">Entity</span> Detail profil siswa. Relasi <strong>One-to-One</strong> dengan Student.</p>
+<table>
+<tr><th>Property</th><th>Tipe</th><th>Penjelasan</th></tr>
+<tr><td><code>StudentId</code></td><td>Guid</td><td>Primary Key sekaligus Foreign Key ke Student</td></tr>
+<tr><td><code>Address</code></td><td>string</td><td>Alamat tempat tinggal siswa</td></tr>
+<tr><td><code>ParentName</code></td><td>string</td><td>Nama orang tua/wali siswa</td></tr>
+<tr><td><code>Student</code></td><td>Student</td><td>Navigation property balik ke Student</td></tr>
+</table>
+
+<h3>5.3 ClassRoom.cs</h3>
+<p><span class="badge badge-green">Entity</span> Entitas kelas. Relasi <strong>One-to-Many</strong> dengan Student.</p>
+<table>
+<tr><th>Property</th><th>Tipe</th><th>Penjelasan</th></tr>
+<tr><td><code>Id</code></td><td>Guid</td><td>Primary Key unik</td></tr>
+<tr><td><code>Name</code></td><td>string</td><td>Nama kelas (misal: "X IPA", "X IPS")</td></tr>
+<tr><td><code>Students</code></td><td>ICollection&lt;Student&gt;</td><td>Koleksi siswa dalam kelas ini</td></tr>
+</table>
+
+<h3>5.4 Extracurricular.cs</h3>
+<p><span class="badge badge-green">Entity</span> Entitas ekstrakurikuler. Relasi <strong>Many-to-Many</strong> dengan Student.</p>
+<table>
+<tr><th>Property</th><th>Tipe</th><th>Penjelasan</th></tr>
+<tr><td><code>Id</code></td><td>Guid</td><td>Primary Key unik</td></tr>
+<tr><td><code>Name</code></td><td>string</td><td>Nama ekstrakurikuler (misal: "Basket", "Pramuka")</td></tr>
+<tr><td><code>StudentExtracurriculars</code></td><td>ICollection&lt;StudentExtracurricular&gt;</td><td>Join collection untuk M:N</td></tr>
+</table>
+
+<h3>5.5 StudentExtracurricular.cs</h3>
+<p><span class="badge badge-orange">Join Entity</span> Tabel penghubung (join table) untuk relasi <strong>Many-to-Many</strong> antara Student dan Extracurricular. Menggunakan composite key <code>(StudentId, ExtracurricularId)</code>.</p>
+<table>
+<tr><th>Property</th><th>Tipe</th><th>Penjelasan</th></tr>
+<tr><td><code>StudentId</code></td><td>Guid</td><td>FK ke Student (bagian composite PK)</td></tr>
+<tr><td><code>Student</code></td><td>Student</td><td>Navigation property</td></tr>
+<tr><td><code>ExtracurricularId</code></td><td>Guid</td><td>FK ke Extracurricular (bagian composite PK)</td></tr>
+<tr><td><code>Extracurricular</code></td><td>Extracurricular</td><td>Navigation property</td></tr>
+</table>
+
+<h3>5.6 User.cs</h3>
+<p><span class="badge badge-green">Entity</span> Entitas user untuk autentikasi JWT.</p>
+<table>
+<tr><th>Property</th><th>Tipe</th><th>Penjelasan</th></tr>
+<tr><td><code>Id</code></td><td>Guid</td><td>Primary Key unik</td></tr>
+<tr><td><code>Username</code></td><td>string</td><td>Username unik untuk login</td></tr>
+<tr><td><code>PasswordHash</code></td><td>string</td><td>Hash password (BCrypt)</td></tr>
+</table>
+
+<h3>5.7 IStudentRepository.cs</h3>
+<p><span class="badge badge-purple">Interface</span> Kontrak repository untuk operasi CRUD Student.</p>
+<table>
+<tr><th>Method</th><th>Return Type</th><th>Penjelasan</th></tr>
+<tr><td><code>GetAllAsync()</code></td><td>Task&lt;List&lt;Student&gt;&gt;</td><td>Ambil semua data siswa beserta relasi</td></tr>
+<tr><td><code>GetByIdAsync(Guid id)</code></td><td>Task&lt;Student?&gt;</td><td>Ambil siswa berdasarkan ID</td></tr>
+<tr><td><code>AddAsync(Student student)</code></td><td>Task</td><td>Tambah siswa baru ke database</td></tr>
+<tr><td><code>UpdateAsync(Student student)</code></td><td>Task</td><td>Update data siswa</td></tr>
+<tr><td><code>DeleteAsync(Guid id)</code></td><td>Task&lt;bool&gt;</td><td>Hapus siswa, return true jika berhasil</td></tr>
+</table>
+
+<h3>5.8 IAuthRepository.cs</h3>
+<p><span class="badge badge-purple">Interface</span> Kontrak repository untuk operasi User/Auth.</p>
+<table>
+<tr><th>Method</th><th>Return Type</th><th>Penjelasan</th></tr>
+<tr><td><code>GetUserByUsernameAsync(string)</code></td><td>Task&lt;User?&gt;</td><td>Cari user berdasarkan username</td></tr>
+<tr><td><code>AddUserAsync(User user)</code></td><td>Task</td><td>Tambah user baru</td></tr>
+<tr><td><code>UserExistsAsync(string)</code></td><td>Task&lt;bool&gt;</td><td>Cek apakah username sudah ada</td></tr>
+</table>
+
+<!-- ==================== 6. APPLICATION LAYER ==================== -->
+<div class="page-break"></div>
+<h2 id="app">6. Application Layer</h2>
+<p><span class="badge badge-blue">Namespace</span> <code>DaftarSekolahCRUD.Application.*</code></p>
+<p>Layer ini berisi business logic, DTOs, service interfaces &amp; implementations, dan AutoMapper profiles.</p>
+
+<h3>6.1 DTOs (Data Transfer Objects)</h3>
+
+<h4>LoginDto.cs</h4>
+<p><span class="badge badge-blue">Namespace</span> <code>DaftarSekolahCRUD.Application.DTOs.Auth</code></p>
+<p>DTO untuk request login. Properties: <code>Username</code> (string), <code>Password</code> (string).</p>
+
+<h4>RegisterUserDto.cs</h4>
+<p>DTO untuk registrasi user baru. Properties: <code>Username</code> (string), <code>Password</code> (string).</p>
+
+<h4>RegisterStudentDto.cs</h4>
+<p><span class="badge badge-blue">Namespace</span> <code>DaftarSekolahCRUD.Application.DTOs.Student</code></p>
+<p>DTO untuk mendaftarkan siswa baru.</p>
+<table>
+<tr><th>Property</th><th>Tipe</th><th>Penjelasan</th></tr>
+<tr><td><code>NIS</code></td><td>string</td><td>Nomor Induk Siswa</td></tr>
+<tr><td><code>Name</code></td><td>string</td><td>Nama siswa</td></tr>
+<tr><td><code>ClassRoomId</code></td><td>Guid</td><td>ID kelas yang dipilih</td></tr>
+<tr><td><code>Address</code></td><td>string</td><td>Alamat (untuk StudentProfile)</td></tr>
+<tr><td><code>ParentName</code></td><td>string</td><td>Nama orang tua (untuk StudentProfile)</td></tr>
+<tr><td><code>ExtracurricularIds</code></td><td>List&lt;Guid&gt;</td><td>Daftar ID ekstrakurikuler yang diikuti</td></tr>
+</table>
+
+<h4>StudentResponseDto.cs</h4>
+<p>DTO untuk response data siswa (flattened dari entity + relasi).</p>
+<table>
+<tr><th>Property</th><th>Tipe</th><th>Sumber Data</th></tr>
+<tr><td><code>Id</code></td><td>Guid</td><td>Student.Id</td></tr>
+<tr><td><code>NIS</code></td><td>string</td><td>Student.NIS</td></tr>
+<tr><td><code>Name</code></td><td>string</td><td>Student.Name</td></tr>
+<tr><td><code>ClassName</code></td><td>string</td><td>Student.ClassRoom.Name</td></tr>
+<tr><td><code>Address</code></td><td>string</td><td>Student.Profile.Address</td></tr>
+<tr><td><code>ParentName</code></td><td>string</td><td>Student.Profile.ParentName</td></tr>
+<tr><td><code>Extracurriculars</code></td><td>List&lt;string&gt;</td><td>Nama-nama ekstrakurikuler</td></tr>
+</table>
+
+<h4>UpdateStudentDto.cs</h4>
+<p>DTO untuk update data siswa. Sama dengan RegisterStudentDto.</p>
+
+<h3>6.2 Service Interfaces</h3>
+
+<h4>IStudentService.cs</h4>
+<p><span class="badge badge-purple">Interface</span> <span class="badge badge-blue">Namespace</span> <code>DaftarSekolahCRUD.Application.Interfaces</code></p>
+<table>
+<tr><th>Method</th><th>Return Type</th><th>Penjelasan</th></tr>
+<tr><td><code>RegisterAsync(RegisterStudentDto)</code></td><td>Task&lt;ServiceResult&lt;StudentResponseDto&gt;&gt;</td><td>Daftarkan siswa baru</td></tr>
+<tr><td><code>GetAllAsync()</code></td><td>Task&lt;ServiceResult&lt;List&lt;StudentResponseDto&gt;&gt;&gt;</td><td>Ambil semua siswa</td></tr>
+<tr><td><code>GetByIdAsync(Guid)</code></td><td>Task&lt;ServiceResult&lt;StudentResponseDto&gt;&gt;</td><td>Ambil siswa berdasarkan ID</td></tr>
+<tr><td><code>UpdateAsync(Guid, UpdateStudentDto)</code></td><td>Task&lt;ServiceResult&lt;StudentResponseDto&gt;&gt;</td><td>Update data siswa</td></tr>
+<tr><td><code>DeleteAsync(Guid)</code></td><td>Task&lt;ServiceResult&lt;bool&gt;&gt;</td><td>Hapus siswa</td></tr>
+</table>
+
+<h4>IAuthService.cs</h4>
+<table>
+<tr><th>Method</th><th>Return Type</th><th>Penjelasan</th></tr>
+<tr><td><code>RegisterAsync(RegisterUserDto)</code></td><td>Task&lt;ServiceResult&lt;string&gt;&gt;</td><td>Registrasi user baru</td></tr>
+<tr><td><code>LoginAsync(LoginDto)</code></td><td>Task&lt;ServiceResult&lt;string&gt;&gt;</td><td>Login, return JWT token</td></tr>
+</table>
+
+<h3>6.3 MappingProfile.cs</h3>
+<p><span class="badge badge-blue">Namespace</span> <code>DaftarSekolahCRUD.Application.Mapping</code></p>
+<p>Class yang extends <code>AutoMapper.Profile</code>. Mendefinisikan pemetaan:</p>
+<ul>
+<li><code>RegisterStudentDto → Student</code> — Ignore Id, ClassRoom, Profile, StudentExtracurriculars</li>
+<li><code>Student → StudentResponseDto</code> — Custom mapping:
+  <ul>
+  <li><code>ClassName</code> ← <code>ClassRoom.Name</code></li>
+  <li><code>Address</code> ← <code>Profile.Address</code></li>
+  <li><code>ParentName</code> ← <code>Profile.ParentName</code></li>
+  <li><code>Extracurriculars</code> ← <code>StudentExtracurriculars.Select(se => se.Extracurricular.Name)</code></li>
+  </ul>
+</li>
+</ul>
+
+<h3>6.4 StudentService.cs</h3>
+<p><span class="badge badge-blue">Namespace</span> <code>DaftarSekolahCRUD.Application.Services</code></p>
+<p>Implementasi <code>IStudentService</code>. Menggunakan <code>IStudentRepository</code> dan <code>IMapper</code> via constructor injection.</p>
+
+<h4>Method Details:</h4>
+<ul>
+<li><strong>RegisterAsync</strong> — Membuat entity Student dari DTO, membuat StudentProfile dan StudentExtracurricular secara manual, lalu memanggil <code>_studentRepository.AddAsync()</code></li>
+<li><strong>GetAllAsync</strong> — Memanggil repository, lalu mapping ke list DTO</li>
+<li><strong>GetByIdAsync</strong> — Mengambil student dari repository, return Failure jika null</li>
+<li><strong>UpdateAsync</strong> — Mengambil student, update property, mengganti extracurriculars, lalu save</li>
+<li><strong>DeleteAsync</strong> — Memanggil <code>_studentRepository.DeleteAsync()</code>, return Failure jika not found</li>
+</ul>
+
+<h3>6.5 AuthService.cs</h3>
+<p>Implementasi <code>IAuthService</code>. Dependencies: <code>IAuthRepository</code>, <code>JwtService</code>.</p>
+<ul>
+<li><strong>RegisterAsync</strong> — Cek user exists, hash password dengan <code>BCrypt.Net.BCrypt.HashPassword()</code>, simpan user</li>
+<li><strong>LoginAsync</strong> — Cari user, verifikasi password dengan <code>BCrypt.Net.BCrypt.Verify()</code>, generate JWT token</li>
+</ul>
+
+<!-- ==================== 7. INFRASTRUCTURE LAYER ==================== -->
+<div class="page-break"></div>
+<h2 id="infra">7. Infrastructure Layer</h2>
+<p><span class="badge badge-blue">Namespace</span> <code>DaftarSekolahCRUD.Infrastructure.*</code></p>
+
+<h3>7.1 AppDbContext.cs</h3>
+<p><span class="badge badge-blue">Namespace</span> <code>DaftarSekolahCRUD.Infrastructure.Persistence</code></p>
+<p>Class yang extends <code>DbContext</code>. Menyediakan <code>DbSet&lt;T&gt;</code> untuk semua entity dan konfigurasi Fluent API di method <code>OnModelCreating()</code>.</p>
+<p><strong>DbSet Properties:</strong> Students, StudentProfiles, ClassRooms, Extracurriculars, StudentExtracurriculars, Users</p>
+<p><strong>Seed Data:</strong> 3 ClassRoom (X IPA, X IPS, X Bahasa) dan 4 Extracurricular (Basket, Futsal, Pramuka, Robotics)</p>
+
+<h3>7.2 StudentRepository.cs</h3>
+<p><span class="badge badge-blue">Namespace</span> <code>DaftarSekolahCRUD.Infrastructure.Repositories</code></p>
+<p>Implementasi <code>IStudentRepository</code> menggunakan EF Core. Fitur utama:</p>
+<ul>
+<li><strong>Eager Loading</strong> — Menggunakan <code>.Include()</code> dan <code>.ThenInclude()</code> untuk memuat ClassRoom, Profile, dan Extracurriculars</li>
+<li><strong>AsNoTracking</strong> — Untuk <code>GetAllAsync</code> (read-only, performa lebih baik)</li>
+<li><strong>Update dengan join table</strong> — Hapus existing StudentExtracurriculars lalu tambah yang baru</li>
+<li><strong>Cascade Delete</strong> — Hapus student akan otomatis menghapus Profile dan StudentExtracurriculars</li>
+</ul>
+
+<h3>7.3 AuthRepository.cs</h3>
+<p>Implementasi <code>IAuthRepository</code>. Operasi sederhana: cari user by username, tambah user, cek user exists.</p>
+
+<h3>7.4 JwtService.cs</h3>
+<p><span class="badge badge-blue">Namespace</span> <code>DaftarSekolahCRUD.Infrastructure.Authentication</code></p>
+<p>Service untuk generate JWT token. Membaca konfigurasi dari <code>appsettings.json</code> section <code>JwtSettings</code>.</p>
+<p><strong>Method <code>GenerateToken(User user)</code>:</strong></p>
+<ul>
+<li>Membuat <code>SymmetricSecurityKey</code> dari SecretKey</li>
+<li>Claims: <code>sub</code> (User ID), <code>unique_name</code> (Username), <code>jti</code> (unique token ID)</li>
+<li>Signing: <code>HmacSha256</code></li>
+<li>Expiration: configurable via <code>ExpirationMinutes</code> (default 60 menit)</li>
+</ul>
+
+<!-- ==================== 8. PRESENTATION LAYER ==================== -->
+<h2 id="presentation">8. Presentation Layer</h2>
+
+<h3>8.1 StudentController.cs</h3>
+<p><span class="badge badge-blue">Namespace</span> <code>DaftarSekolahCRUD.Controllers</code> | <span class="badge badge-red">Route</span> <code>api/student</code> | <span class="badge badge-orange">Auth</span> <code>[Authorize]</code></p>
+<p>Controller CRUD lengkap. Setiap endpoint memerlukan JWT token (kecuali dikonfigurasi lain).</p>
+<table>
+<tr><th>HTTP Method</th><th>Route</th><th>Method</th><th>Penjelasan</th></tr>
+<tr><td>POST</td><td>/api/student/register</td><td>Register()</td><td>Daftarkan siswa baru</td></tr>
+<tr><td>GET</td><td>/api/student</td><td>GetAll()</td><td>Ambil semua siswa</td></tr>
+<tr><td>GET</td><td>/api/student/{id}</td><td>GetById()</td><td>Ambil siswa berdasarkan ID</td></tr>
+<tr><td>PUT</td><td>/api/student/{id}</td><td>Update()</td><td>Update data siswa</td></tr>
+<tr><td>DELETE</td><td>/api/student/{id}</td><td>Delete()</td><td>Hapus siswa</td></tr>
+</table>
+
+<h3>8.2 AuthController.cs</h3>
+<p><span class="badge badge-red">Route</span> <code>api/auth</code> | <span class="badge badge-green">Public</span> Tidak perlu JWT</p>
+<table>
+<tr><th>HTTP Method</th><th>Route</th><th>Method</th><th>Penjelasan</th></tr>
+<tr><td>POST</td><td>/api/auth/register</td><td>Register()</td><td>Registrasi user baru</td></tr>
+<tr><td>POST</td><td>/api/auth/login</td><td>Login()</td><td>Login, mendapatkan JWT token</td></tr>
+</table>
+
+<h3>8.3 Program.cs</h3>
+<p>Entry point aplikasi. Konfigurasi yang dilakukan:</p>
+<ol>
+<li><strong>DbContext</strong> — <code>AddDbContext&lt;AppDbContext&gt;</code> dengan SQLite connection string</li>
+<li><strong>Repository DI</strong> — <code>AddScoped&lt;IStudentRepository, StudentRepository&gt;</code>, <code>AddScoped&lt;IAuthRepository, AuthRepository&gt;</code></li>
+<li><strong>Service DI</strong> — <code>AddScoped&lt;IStudentService, StudentService&gt;</code>, <code>AddScoped&lt;IAuthService, AuthService&gt;</code></li>
+<li><strong>JwtService</strong> — <code>AddSingleton&lt;JwtService&gt;</code></li>
+<li><strong>AutoMapper</strong> — <code>AddAutoMapper(typeof(MappingProfile))</code></li>
+<li><strong>JWT Auth</strong> — <code>AddAuthentication().AddJwtBearer()</code> dengan token validation</li>
+<li><strong>Swagger</strong> — Dengan security definition Bearer JWT</li>
+<li><strong>CORS</strong> — Allow any origin, method, header</li>
+<li><strong>Auto-Migrate</strong> — <code>dbContext.Database.EnsureCreated()</code></li>
+</ol>
+
+<!-- ==================== 9. SHARED LAYER ==================== -->
+<h2 id="shared">9. Shared Layer</h2>
+<h3>ServiceResult.cs</h3>
+<p><span class="badge badge-blue">Namespace</span> <code>DaftarSekolahCRUD.Shared</code></p>
+<p>Lihat bagian <a href="#service-result">ServiceResult&lt;T&gt; Pattern</a> di bawah.</p>
+
+<!-- ==================== 10. DB RELATIONSHIPS ==================== -->
+<div class="page-break"></div>
+<h2 id="relationships">10. Database Relationships</h2>
+
+<h3>10.1 One-to-One: Student ↔ StudentProfile</h3>
+<div class="info-box">
+<strong>Konsep:</strong> Setiap Student memiliki tepat satu StudentProfile, dan sebaliknya.<br>
+<strong>Implementasi:</strong> <code>StudentProfile.StudentId</code> adalah primary key sekaligus foreign key ke <code>Student.Id</code>.<br>
+<strong>Navigation:</strong> <code>Student.Profile</code> ↔ <code>StudentProfile.Student</code>
+</div>
+<pre><code>Student (Id: PK) ──────1:1────── StudentProfile (StudentId: PK + FK)</code></pre>
+
+<h3>10.2 One-to-Many: ClassRoom → Students</h3>
+<div class="info-box">
+<strong>Konsep:</strong> Satu ClassRoom memiliki banyak Student, tapi setiap Student hanya punya satu ClassRoom.<br>
+<strong>Implementasi:</strong> <code>Student.ClassRoomId</code> adalah foreign key ke <code>ClassRoom.Id</code>.<br>
+<strong>Delete Behavior:</strong> Restrict (tidak boleh hapus kelas yang masih punya siswa)
+</div>
+<pre><code>ClassRoom (Id: PK) ──────1:N────── Student (ClassRoomId: FK)</code></pre>
+
+<h3>10.3 Many-to-Many: Student ↔ Extracurricular</h3>
+<div class="info-box">
+<strong>Konsep:</strong> Satu Student bisa ikut banyak Extracurricular, dan satu Extracurricular bisa diikuti banyak Student.<br>
+<strong>Implementasi:</strong> Melalui join table <code>StudentExtracurricular</code> dengan composite key <code>(StudentId, ExtracurricularId)</code>.<br>
+<strong>Delete Behavior:</strong> Cascade (hapus student → hapus record di join table)
+</div>
+<pre><code>Student (Id: PK) ──N:M── StudentExtracurricular (StudentId + ExtracurricularId: Composite PK) ──M:N── Extracurricular (Id: PK)</code></pre>
+
+<!-- ==================== 11. FLUENT API ==================== -->
+<h2 id="fluentapi">11. Fluent API Configuration</h2>
+<p>Semua konfigurasi entity dilakukan di method <code>OnModelCreating()</code> dalam <code>AppDbContext</code> menggunakan <strong>Fluent API</strong> (bukan Data Annotations).</p>
+
+<h4>Contoh konfigurasi One-to-One:</h4>
+<pre><code>modelBuilder.Entity&lt;StudentProfile&gt;(entity =&gt;
+{
+    entity.HasKey(sp =&gt; sp.StudentId);
+    entity.HasOne(sp =&gt; sp.Student)
+        .WithOne(s =&gt; s.Profile)
+        .HasForeignKey&lt;StudentProfile&gt;(sp =&gt; sp.StudentId)
+        .OnDelete(DeleteBehavior.Cascade);
+});</code></pre>
+
+<h4>Contoh konfigurasi Many-to-Many (Composite Key):</h4>
+<pre><code>modelBuilder.Entity&lt;StudentExtracurricular&gt;(entity =&gt;
+{
+    entity.HasKey(se =&gt; new { se.StudentId, se.ExtracurricularId });
+    entity.HasOne(se =&gt; se.Student)
+        .WithMany(s =&gt; s.StudentExtracurriculars)
+        .HasForeignKey(se =&gt; se.StudentId);
+});</code></pre>
+
+<!-- ==================== 12. REPOSITORY PATTERN ==================== -->
+<h2 id="repo-pattern">12. Repository Design Pattern</h2>
+<p>Repository Pattern memisahkan logika akses data dari business logic. Keuntungan:</p>
+<ul>
+<li><strong>Abstraksi</strong> — Service hanya bergantung pada interface, bukan implementasi</li>
+<li><strong>Testability</strong> — Mudah di-mock untuk unit testing</li>
+<li><strong>Single Responsibility</strong> — Repository fokus pada data access, Service fokus pada business logic</li>
+</ul>
+<pre><code>Controller → IStudentService → IStudentRepository → AppDbContext → SQLite
+   (DI)           (DI)              (DI)                (EF Core)</code></pre>
+
+<!-- ==================== 13. DTO & AUTOMAPPER ==================== -->
+<h2 id="dto-mapper">13. DTO &amp; AutoMapper</h2>
+<p><strong>DTO (Data Transfer Object)</strong> digunakan untuk:</p>
+<ul>
+<li>Memisahkan model internal (Entity) dari data yang dikirim/diterima via API</li>
+<li>Mencegah over-posting (hanya property yang diperlukan yang diterima)</li>
+<li>Flatten data dari multiple entities ke satu response object</li>
+</ul>
+<p><strong>AutoMapper</strong> melakukan konversi otomatis antara Entity ↔ DTO berdasarkan konfigurasi di <code>MappingProfile.cs</code>.</p>
+
+<!-- ==================== 14. JWT ==================== -->
+<h2 id="jwt">14. JWT Authentication</h2>
+<p>Alur autentikasi JWT:</p>
+<ol>
+<li><strong>Register</strong> — User mendaftar dengan username &amp; password → password di-hash dengan BCrypt → disimpan ke DB</li>
+<li><strong>Login</strong> — User mengirim credentials → password diverifikasi → <code>JwtService</code> generate token → token dikembalikan</li>
+<li><strong>Access Protected Endpoint</strong> — Client mengirim request dengan header <code>Authorization: Bearer {token}</code> → middleware memvalidasi token → mengizinkan akses</li>
+</ol>
+<h4>Konfigurasi JWT (appsettings.json):</h4>
+<pre><code>{
+  "JwtSettings": {
+    "SecretKey": "SuperSecretKey-DaftarSekolahCRUD-2026-MinLength32Chars!",
+    "Issuer": "DaftarSekolahCRUD",
+    "Audience": "DaftarSekolahCRUD-Client",
+    "ExpirationMinutes": "60"
+  }
+}</code></pre>
+
+<!-- ==================== 15. SERVICE RESULT ==================== -->
+<h2 id="service-result">15. ServiceResult&lt;T&gt; Pattern</h2>
+<p>Pattern untuk membungkus response dari service layer secara konsisten.</p>
+<pre><code>public class ServiceResult&lt;T&gt;
+{
+    public bool IsSuccess { get; set; }
+    public T? Data { get; set; }
+    public string Message { get; set; }
+    public string? ErrorMessage { get; set; }
+
+    public static ServiceResult&lt;T&gt; Success(T data, string message);
+    public static ServiceResult&lt;T&gt; Failure(string errorMessage);
+}</code></pre>
+<p><strong>Keuntungan:</strong> Controller tidak perlu throw exception untuk error handling. Cukup cek <code>IsSuccess</code> lalu return HTTP status code yang sesuai.</p>
+
+<!-- ==================== 16. ENDPOINTS ==================== -->
+<h2 id="endpoints">16. API Endpoints</h2>
+<table>
+<tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Body</th><th>Penjelasan</th></tr>
+<tr><td>POST</td><td>/api/auth/register</td><td>❌</td><td>RegisterUserDto</td><td>Registrasi user</td></tr>
+<tr><td>POST</td><td>/api/auth/login</td><td>❌</td><td>LoginDto</td><td>Login, return JWT</td></tr>
+<tr><td>POST</td><td>/api/student/register</td><td>✅</td><td>RegisterStudentDto</td><td>Daftar siswa baru</td></tr>
+<tr><td>GET</td><td>/api/student</td><td>✅</td><td>-</td><td>List semua siswa</td></tr>
+<tr><td>GET</td><td>/api/student/{id}</td><td>✅</td><td>-</td><td>Detail siswa by ID</td></tr>
+<tr><td>PUT</td><td>/api/student/{id}</td><td>✅</td><td>UpdateStudentDto</td><td>Update siswa</td></tr>
+<tr><td>DELETE</td><td>/api/student/{id}</td><td>✅</td><td>-</td><td>Hapus siswa</td></tr>
+</table>
+
+<!-- ==================== 17. TESTING ==================== -->
+<h2 id="testing">17. Testing dengan Swagger</h2>
+<ol>
+<li>Jalankan <code>dotnet run</code></li>
+<li>Buka <code>http://localhost:{port}/swagger</code></li>
+<li><strong>Register user:</strong> POST <code>/api/auth/register</code> dengan body <code>{"username":"admin","password":"admin123"}</code></li>
+<li><strong>Login:</strong> POST <code>/api/auth/login</code> → copy JWT token dari response</li>
+<li><strong>Authorize:</strong> Klik tombol "Authorize" di Swagger → paste token</li>
+<li><strong>Test CRUD:</strong> Gunakan endpoint Student dengan token yang sudah di-set</li>
+</ol>
+
+<h4>Contoh body Register Student:</h4>
+<pre><code>{
+  "nis": "2026001",
+  "name": "Budi Santoso",
+  "classRoomId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "address": "Jl. Merdeka No. 10, Jakarta",
+  "parentName": "Pak Santoso",
+  "extracurricularIds": [
+    "d4e5f6a7-b8c9-0123-defa-234567890123",
+    "f6a7b8c9-d0e1-2345-fabc-456789012345"
+  ]
+}</code></pre>
+
+<div class="info-box">
+<strong>💡 Seed Data ClassRoom IDs:</strong><br>
+• X IPA: <code>a1b2c3d4-e5f6-7890-abcd-ef1234567890</code><br>
+• X IPS: <code>b2c3d4e5-f6a7-8901-bcde-f12345678901</code><br>
+• X Bahasa: <code>c3d4e5f6-a7b8-9012-cdef-123456789012</code><br><br>
+<strong>Seed Data Extracurricular IDs:</strong><br>
+• Basket: <code>d4e5f6a7-b8c9-0123-defa-234567890123</code><br>
+• Futsal: <code>e5f6a7b8-c9d0-1234-efab-345678901234</code><br>
+• Pramuka: <code>f6a7b8c9-d0e1-2345-fabc-456789012345</code><br>
+• Robotics: <code>a7b8c9d0-e1f2-3456-abcd-567890123456</code>
+</div>
+
+</div>
+</body>
+</html>
