@@ -1,0 +1,62 @@
+@using EnterpriseCRUD.Web.ViewComponents
+@model DynamicTableViewModel
+
+<div class="table-responsive">
+    <table class="table table-hover align-middle">
+        <thead class="table-light">
+            <tr>
+                @foreach (var field in Model.Metadata.Fields.Where(f => f.ShowInList))
+                {
+                    <th>@field.Label</th>
+                }
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Data)
+            {
+                var dict = item as IDictionary<string, object>;
+                <tr>
+                    @foreach (var field in Model.Metadata.Fields.Where(f => f.ShowInList))
+                    {
+                        var camelKey = char.ToLowerInvariant(field.Name[0]) + field.Name[1..];
+                        <td>
+                            @if (field.FieldType == "reference" && dict != null && dict.ContainsKey(camelKey + "Display"))
+                            {
+                                @dict[camelKey + "Display"]
+                            }
+                            else if (dict != null && dict.ContainsKey(camelKey))
+                            {
+                                var val = dict[camelKey];
+                                if (field.FieldType == "datetime" || field.FieldType == "date")
+                                {
+                                    @string.Format("{0:yyyy-MM-dd HH:mm}", val)
+                                }
+                                else if (field.FieldType == "bool")
+                                {
+                                    <span class="badge @((bool)val ? "bg-success" : "bg-secondary")">@val</span>
+                                }
+                                else
+                                {
+                                    @val
+                                }
+                            }
+                        </td>
+                    }
+                    <td class="text-end">
+                        <div class="btn-group btn-group-sm">
+                            <a asp-action="Edit" asp-route-entityName="@Model.Metadata.Name" asp-route-id="@(dict?["id"])" class="btn btn-outline-primary" title="Edit">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <form asp-action="Delete" asp-route-entityName="@Model.Metadata.Name" asp-route-id="@(dict?["id"])" method="post" onsubmit="return confirm('Are you sure?')" style="display:inline;">
+                                <button type="submit" class="btn btn-outline-danger" title="Delete">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

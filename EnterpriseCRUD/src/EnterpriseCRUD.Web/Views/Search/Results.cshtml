@@ -1,0 +1,40 @@
+@model IEnumerable<EnterpriseCRUD.Web.Controllers.GlobalSearchResult>
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<div class="mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Search Results</h1>
+    <p class="text-muted">Showing results for "@ViewBag.Query"</p>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        No results found for "@ViewBag.Query" across any module.
+    </div>
+}
+else
+{
+    <div class="row">
+        @foreach (var result in Model)
+        {
+            <div class="col-12 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            <i class="bi bi-@(result.ModuleMetadata.Icon ?? "circle") me-2"></i>
+                            @result.ModuleMetadata.DisplayName
+                        </h6>
+                        <a asp-controller="Crud" asp-action="Index" asp-route-entityName="@result.ModuleMetadata.Name" asp-route-search="@ViewBag.Query" class="btn btn-sm btn-outline-primary">
+                            View All Results
+                        </a>
+                    </div>
+                    <div class="card-body p-0">
+                        @await Component.InvokeAsync("DynamicTable", new { data = result.Items, metadata = result.ModuleMetadata })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

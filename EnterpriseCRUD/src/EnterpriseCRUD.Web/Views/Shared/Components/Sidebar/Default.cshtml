@@ -1,0 +1,39 @@
+@using EnterpriseCRUD.Domain.Metadata
+@model IEnumerable<EntityMetadata>
+
+<div class="sidebar-heading p-3 text-muted small text-uppercase fw-bold">
+    Modules
+</div>
+
+<ul class="nav flex-column mb-auto">
+    @foreach (var module in Model)
+    {
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center gap-2 @(Context.Request.Path.Value?.Contains($"/admin/{module.Name}") == true ? "active" : "")" 
+               asp-controller="Crud" asp-action="Index" asp-route-entityName="@module.Name">
+                <i class="bi bi-@(module.Icon ?? "circle") fs-5"></i>
+                <span>@module.DisplayName</span>
+            </a>
+        </li>
+    }
+</ul>
+
+<hr class="my-3">
+
+<div class="sidebar-heading p-3 text-muted small text-uppercase fw-bold">
+    System
+</div>
+<ul class="nav flex-column mb-auto">
+    <li class="nav-item">
+        <a class="nav-link d-flex align-items-center gap-2" href="/admin/metadata-modules">
+            <i class="bi bi-gear fs-5"></i>
+            <span>Settings</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link d-flex align-items-center gap-2" href="/admin/audit-logs">
+            <i class="bi bi-history fs-5"></i>
+            <span>Audit Logs</span>
+        </a>
+    </li>
+</ul>

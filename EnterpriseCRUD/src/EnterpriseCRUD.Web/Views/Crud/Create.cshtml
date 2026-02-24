@@ -1,0 +1,41 @@
+@using EnterpriseCRUD.Domain.Metadata
+@{
+    var metadata = ViewBag.Metadata as EntityMetadata;
+    ViewData["Title"] = $"New {metadata?.DisplayNameSingular}";
+}
+
+<div class="mb-4">
+    <h1 class="h3 mb-0 text-gray-800">New @metadata?.DisplayNameSingular</h1>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item"><a asp-action="Index" asp-route-entityName="@metadata?.Name">@metadata?.DisplayName</a></li>
+            <li class="breadcrumb-item active">New</li>
+        </ol>
+    </nav>
+</div>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger shadow-sm border-start-danger" role="alert">
+        @ViewBag.Error
+    </div>
+}
+
+<div class="card shadow-sm mb-4">
+    <div class="card-header py-3 bg-white">
+        <h6 class="m-0 font-weight-bold text-primary">@metadata?.DisplayNameSingular Details</h6>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create" asp-route-entityName="@metadata?.Name" method="post">
+            @await Component.InvokeAsync("DynamicForm", new { metadata = metadata })
+            
+            <div class="mt-4 border-top pt-3 d-flex justify-content-end gap-2">
+                <a asp-action="Index" asp-route-entityName="@metadata?.Name" class="btn btn-outline-secondary">Cancel</a>
+                <button type="submit" class="btn btn-success px-4 shadow-sm">
+                    <i class="bi bi-check-lg"></i> Create @metadata?.DisplayNameSingular
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

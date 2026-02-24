@@ -1,0 +1,53 @@
+@using EnterpriseCRUD.Web.ViewComponents
+@model DynamicFormViewModel
+
+@{
+    var dict = Model.Entity as IDictionary<string, object>;
+}
+
+<div class="row g-3">
+    @foreach (var field in Model.Metadata.Fields.Where(f => (Model.Entity == null ? f.ShowInCreate : f.ShowInEdit)))
+    {
+        var camelKey = char.ToLowerInvariant(field.Name[0]) + field.Name[1..];
+        var value = dict != null && dict.ContainsKey(camelKey) ? dict[camelKey] : field.DefaultValue;
+        
+        <div class="col-md-@(field.FieldType == "richtext" ? "12" : "6")">
+            <label for="@field.Name" class="form-label">@field.Label @(field.IsRequired ? "*" : "")</label>
+
+            @if (field.FieldType == "enum" && field.Choices != null)
+            {
+                <select name="@field.Name" id="@field.Name" class="form-select" @(field.IsRequired ? "required" : "") @(field.IsReadOnly ? "disabled" : "")>
+                    <option value="">Select @field.Label...</option>
+                    @foreach (var choice in field.Choices)
+                    {
+                        <option value="@choice.Value" selected="@(value?.ToString() == choice.Value.ToString() || value?.ToString() == choice.Label)">@choice.Label</option>
+                    }
+                </select>
+            }
+            else if (field.FieldType == "bool")
+            {
+                <div class="form-check form-switch mt-2">
+                    <input class="form-check-input" type="checkbox" name="@field.Name" id="@field.Name" value="true" checked="@(value != null && (bool)value)" @(field.IsReadOnly ? "disabled" : "")>
+                    <label class="form-check-label" for="@field.Name">@field.Label</label>
+                </div>
+            }
+            else if (field.FieldType == "richtext")
+            {
+                <textarea name="@field.Name" id="@field.Name" class="form-control richtext" rows="5" @(field.IsRequired ? "required" : "") @(field.IsReadOnly ? "readonly" : "")>@value</textarea>
+            }
+            else if (field.FieldType == "date")
+            {
+                <input type="date" name="@field.Name" id="@field.Name" class="form-control" value="@(value != null ? string.Format("{0:yyyy-MM-dd}", value) : "")" @(field.IsRequired ? "required" : "") @(field.IsReadOnly ? "readonly" : "")>
+            }
+            else
+            {
+                <input type="@(field.FieldType == "email" ? "email" : "text")" name="@field.Name" id="@field.Name" class="form-control" placeholder="@field.Placeholder" value="@value" @(field.IsRequired ? "required" : "") @(field.IsReadOnly ? "readonly" : "")>
+            }
+            
+            @if (!string.IsNullOrEmpty(field.Tooltip))
+            {
+                <div class="form-text">@field.Tooltip</div>
+            }
+        </div>
+    }
+</div>

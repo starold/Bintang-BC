@@ -1,0 +1,71 @@
+@using EnterpriseCRUD.Domain.Metadata
+@model EnterpriseCRUD.Application.Common.Models.PagedResult
+
+@{
+    var metadata = ViewBag.Metadata as EntityMetadata;
+    ViewData["Title"] = metadata?.DisplayName ?? "Module";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3 mb-0 text-gray-800">@metadata?.DisplayName</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                <li class="breadcrumb-item active">@metadata?.DisplayName</li>
+            </ol>
+        </nav>
+    </div>
+    <div>
+        <a asp-action="Export" asp-route-entityName="@metadata?.Name" asp-route-search="@Context.Request.Query["search"]" class="btn btn-outline-secondary shadow-sm mr-2">
+            <i class="bi bi-download"></i> Export CSV
+        </a>
+        <a asp-action="Create" asp-route-entityName="@metadata?.Name" class="btn btn-primary shadow-sm">
+            <i class="bi bi-plus-lg"></i> New @metadata?.DisplayNameSingular
+        </a>
+    </div>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show shadow-sm border-start-success" role="alert">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="card shadow-sm mb-4">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
+        <h6 class="m-0 font-weight-bold text-primary">List of @metadata?.DisplayName</h6>
+        
+        <form asp-action="Index" asp-route-entityName="@metadata?.Name" method="get" class="d-flex w-25">
+            <div class="input-group input-group-sm">
+                <input type="text" name="search" class="form-control" placeholder="Search..." value="@Context.Request.Query["search"]">
+                <button class="btn btn-outline-secondary" type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="card-body p-0">
+        @await Component.InvokeAsync("DynamicTable", new { data = Model.Data, metadata = metadata })
+    </div>
+    <div class="card-footer bg-white py-3">
+        <nav aria-label="Page navigation">
+            <ul class="pagination pagination-sm justify-content-end mb-0">
+                <li class="page-item @(Model.Page == 1 ? "disabled" : "")">
+                    <a class="page-item" asp-route-entityName="@metadata?.Name" asp-route-page="@(Model.Page - 1)">Previous</a>
+                </li>
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(Model.Page == i ? "active" : "")">
+                        <a class="page-link" asp-route-entityName="@metadata?.Name" asp-route-page="@i">@i</a>
+                    </li>
+                }
+                <li class="page-item @(Model.Page == Model.TotalPages ? "disabled" : "")">
+                    <a class="page-link" asp-route-entityName="@metadata?.Name" asp-route-page="@(Model.Page + 1)">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
